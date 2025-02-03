@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Feed Articles</string>
+    <string name="register_title">Créer votre compte</string>
+    <string name="login_title">Connectez-vous</string>
+    <string name="detail_title">Informations sur l\'article</string>
+    <string name="edit_title">Modification de l\'article</string>
+    <string name="username">Nom d\'utilisateur</string>
+    <string name="password">Mot de passe</string>
+    <string name="confirm_password">Confirmer votre mot de passe</string>
+    <string name="validate">Valider</string>
+    <string name="already_account">J\'ai déjà un compte</string>
+    <string name="no_account">Je n\'ai pas de compte</string>
+    <string name="welcome_title">Bienvenue</string>
+    <string name="product_title">Titre</string>
+    <string name="product_category">Catégorie</string>
+    <string name="product_description">Description</string>
+    <string name="filter">Filtre</string>
+    <string name="new_article">Nouvel article</string>
+    <string name="disconnect">Déconnexion</string>
+    <string name="create_article_title">Créer un article</string>
+    <string name="description_label">Description</string>
+    <string name="image_label">Url image</string>
+    <string name="create">Créer</string>
+    <string name="back">Retour</string>
+    <string name="edit_label">Modifier l\'article</string>
+    <string name="confirm_edit_label">Valider les modifs</string>
+</resources>
