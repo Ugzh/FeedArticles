@@ -12,7 +12,7 @@
     <string name="already_account">J\'ai déjà un compte</string>
     <string name="no_account">Je n\'ai pas de compte</string>
     <string name="welcome_title">Bienvenue</string>
-    <string name="product_title">Titre</string>
+    <string name="product_title"><u>Titre</u></string>
     <string name="product_category">Catégorie</string>
     <string name="product_description">Description</string>
     <string name="filter">Filtre</string>

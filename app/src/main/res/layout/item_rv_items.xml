@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/item_rv_items"
+    android:layout_margin="5dp"
+    app:cardCornerRadius="15dp"
+    >
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_rv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+
+
+        <TextView
+            android:id="@+id/tv_rv_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:fontFamily="@font/nunito_medium"
+            android:text="@string/product_title"
+            android:ellipsize="end"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toStartOf="@+id/img_rv_picture"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/img_rv_picture" />
+
+        <ImageView
+            android:id="@+id/img_rv_picture"
+            android:layout_width="105dp"
+            android:layout_height="95dp"
+            android:layout_marginVertical="15dp"
+            android:layout_marginHorizontal="15dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:srcCompat="@tools:sample/backgrounds/scenic" />
+
+        <TextView
+            android:id="@+id/tv_rv_category"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/product_category"
+            android:layout_marginTop="5dp"
+            android:paddingHorizontal="10dp"
+            android:paddingVertical="1dp"
+            android:textSize="12sp"
+            android:fontFamily="@font/nunito"
+            android:background="@drawable/edit_text_style"
+            app:layout_constraintStart_toStartOf="@+id/tv_rv_title"
+            app:layout_constraintTop_toBottomOf="@+id/tv_rv_title" />
+
+        <TextView
+            android:id="@+id/tv_rv_description"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="20dp"
+            android:fontFamily="@font/nunito"
+            android:textSize="14sp"
+            android:text="@string/product_description"
+            app:layout_constraintBottom_toBottomOf="@+id/img_rv_picture"
+            app:layout_constraintEnd_toStartOf="@+id/img_rv_picture"
+            app:layout_constraintStart_toStartOf="@+id/tv_rv_category"
+            app:layout_constraintTop_toBottomOf="@+id/tv_rv_category" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>

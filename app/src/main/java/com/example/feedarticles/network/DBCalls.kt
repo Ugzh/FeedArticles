@@ -1,9 +1,8 @@
-package com.example.feedarticles
+package com.example.feedarticles.network
 
 import com.example.feedarticles.dtos.RegisterAndLoginDto
 import com.example.feedarticles.dtos.RegisterAndLoginResponseDto
 import com.example.feedarticles.dtos.UserDto
-import com.example.feedarticles.network.ApiService
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

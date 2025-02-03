@@ -3,4 +3,7 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="borderColor">#C9CBCBCB</color>
+    <color name="sportColor">#F2FAFF</color>
+    <color name="mangaColor">#EBF1FA</color>
+    <color name="variousColor">#CFCEEB</color>
 </resources>

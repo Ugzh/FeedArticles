@@ -11,7 +11,7 @@
     <string name="already_account">I already have an account</string>
     <string name="no_account">I don\'t have an account</string>
     <string name="welcome_title">Welcome</string>
-    <string name="product_title">Title</string>
+    <string name="product_title"><u>Title</u></string>
     <string name="product_category">Category</string>
     <string name="product_description">Description</string>
     <string name="filter">Filter</string>
@@ -24,4 +24,6 @@
     <string name="back">Back</string>
     <string name="edit_label">Edit an article</string>
     <string name="confirm_edit_label">Confirm changes</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

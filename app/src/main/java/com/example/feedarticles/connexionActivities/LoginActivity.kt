@@ -1,4 +1,4 @@
-package com.example.feedarticles
+package com.example.feedarticles.connexionActivities
 
 import android.content.Intent
 import android.os.Bundle
@@ -6,11 +6,11 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
+import com.example.feedarticles.MainActivity
+import com.example.feedarticles.R
 import com.example.feedarticles.dtos.RegisterAndLoginDto
+import com.example.feedarticles.network.loginUser
 
 class LoginActivity : AppCompatActivity() {
     
@@ -33,6 +33,7 @@ class LoginActivity : AppCompatActivity() {
 
                     user?.let {
                         startActivity(Intent(this, MainActivity::class.java).putExtra(KEY_USER_DATA, user))
+                        finish()
                     }
                 }
             } else
