@@ -16,7 +16,7 @@
     <string name="product_description">Description</string>
     <string name="filter">Filter</string>
     <string name="new_article">New article</string>
-    <string name="disconnect">Disconnect</string>
+    <string name="logout">Log out</string>
     <string name="create_article_title">Create an article</string>
     <string name="description_label">Description</string>
     <string name="image_label">Url image</string>

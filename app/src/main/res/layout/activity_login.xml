@@ -60,7 +60,7 @@
         app:layout_constraintTop_toBottomOf="@+id/et_login_username" />
 
     <EditText
-        android:id="@+id/et_createAccount_password"
+        android:id="@+id/et_login_password"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
@@ -84,12 +84,12 @@
         app:cornerRadius="10dp"
         android:paddingHorizontal="42dp"
         android:paddingVertical="8dp"
-        app:layout_constraintEnd_toEndOf="@+id/et_createAccount_password"
-        app:layout_constraintStart_toStartOf="@+id/et_createAccount_password"
-        app:layout_constraintTop_toBottomOf="@+id/et_createAccount_password" />
+        app:layout_constraintEnd_toEndOf="@+id/et_login_password"
+        app:layout_constraintStart_toStartOf="@+id/et_login_password"
+        app:layout_constraintTop_toBottomOf="@+id/et_login_password" />
 
     <TextView
-        android:id="@+id/tv_createAccount_alreadyAccount"
+        android:id="@+id/tv_login_noAccount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"

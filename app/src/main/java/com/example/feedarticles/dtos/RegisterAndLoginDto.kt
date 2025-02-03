@@ -3,7 +3,7 @@ package com.example.feedarticles.dtos
 
 import com.squareup.moshi.Json
 
-data class RegisterDto(
+data class RegisterAndLoginDto(
     @Json(name = "login")
     val login: String,
     @Json(name = "mdp")
