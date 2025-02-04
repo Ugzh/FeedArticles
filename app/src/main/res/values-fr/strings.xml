@@ -25,4 +25,8 @@
     <string name="back">Retour</string>
     <string name="edit_label">Modifier l\'article</string>
     <string name="confirm_edit_label">Valider les modifs</string>
+    <string name="sport">Sport</string>
+    <string name="manga">Manga</string>
+    <string name="various">Divers</string>
+    <string name="unknown">Inconnu</string>
 </resources>

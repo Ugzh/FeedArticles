@@ -2,6 +2,7 @@ package com.example.feedarticles.mainRecyclerView
 
 import android.content.Context
 import android.graphics.Color
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
@@ -12,7 +13,7 @@ import com.squareup.picasso.Picasso
 
 class ItemsAdapter: RecyclerView.Adapter<ItemsHolder>() {
     private val itemsList = mutableListOf<ItemDto>()
-    private var context : Context? = null
+    private var itemDetailCallback : ((ItemDto) -> Unit)? = null
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemsHolder {
         LayoutInflater.from(parent.context)
             .inflate(R.layout.item_rv_items, parent, false)
@@ -46,9 +47,13 @@ class ItemsAdapter: RecyclerView.Adapter<ItemsHolder>() {
                     }
                 }
 
+                clLayout.setOnClickListener { _ ->
+                    itemDetailCallback?.invoke(it)
+                }
+
                 Picasso
                     .get()
-                    .load(it.urlImage.ifEmpty { "" })
+                    .load(it.urlImage.ifEmpty { "boo" })
                     .placeholder(android.R.drawable.ic_menu_search)
                     .error(android.R.drawable.stat_notify_error)
                     .into(ivPicture)
@@ -62,5 +67,9 @@ class ItemsAdapter: RecyclerView.Adapter<ItemsHolder>() {
             addAll(newItems)
         }
         notifyDataSetChanged()
+    }
+
+    fun setItemDetailCallback(itemDetailCallback : (ItemDto) -> Unit ){
+        this.itemDetailCallback = itemDetailCallback
     }
 }

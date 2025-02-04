@@ -51,7 +51,7 @@
 
     <!--<androidx.fragment.app.FragmentContainerView
         android:id="@+id/fragmentContainerView"
-        android:name="com.example.feedarticles.RecyclerFragment"
+        android:name="com.example.feedarticles.mainRecyclerView.RecyclerFragment"
         android:layout_marginTop="15dp"
         android:layout_width="0dp"
         android:layout_height="0dp"

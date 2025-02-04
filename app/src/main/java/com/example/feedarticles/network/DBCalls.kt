@@ -84,8 +84,8 @@ fun getAllItems(user : UserDto, sendItemsOrMessageCallback: (List<ItemDto>?, Str
     })
 }
 
-fun getItemById(id : Long, user: UserDto, sendItemOrMessageCallback: (ItemDto?, String?) -> Unit){
-    val call : Call<GetItemByIdDto>? = ApiService.getApi().getItemById(id, user.token)
+fun getItemById(item: ItemDto, user: UserDto, sendItemOrMessageCallback: (ItemDto?, String?) -> Unit){
+    val call : Call<GetItemByIdDto>? = ApiService.getApi().getItemById(item.id, user.token)
     call?.enqueue(object: Callback<GetItemByIdDto>{
         override fun onResponse(call: Call<GetItemByIdDto>, response: Response<GetItemByIdDto>) {
             response.body()?.let {
@@ -99,7 +99,7 @@ fun getItemById(id : Long, user: UserDto, sendItemOrMessageCallback: (ItemDto?, 
         }
 
         override fun onFailure(call: Call<GetItemByIdDto>, t: Throwable) {
-            TODO("Not yet implemented")
+            sendItemOrMessageCallback(null, "Problème avec la base de données")
         }
 
     })

@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ItemDetailActivity">
+
+    <TextView
+        android:id="@+id/tv_itemDetail_firstTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:theme="@style/FirstTitleTheme"
+        android:layout_marginTop="40dp"
+        android:layout_marginStart="40dp"
+        android:text="@string/detail_title"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_itemDetail_secondTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:theme="@style/SecondTitleTheme"
+        android:text="@string/product_title"
+        android:textStyle="italic"
+        app:layout_constraintStart_toStartOf="@+id/tv_itemDetail_firstTitle"
+        app:layout_constraintTop_toBottomOf="@+id/tv_itemDetail_firstTitle" />
+
+    <ImageView
+        android:id="@+id/img_itemDetail_picture"
+        android:layout_width="300dp"
+        android:layout_height="255dp"
+        android:layout_marginTop="40dp"
+        app:layout_constraintStart_toStartOf="@+id/tv_itemDetail_secondTitle"
+        app:layout_constraintTop_toBottomOf="@+id/tv_itemDetail_secondTitle"
+        tools:srcCompat="@tools:sample/backgrounds/scenic" />
+
+    <TextView
+        android:id="@+id/tv_itemDetail_category"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/product_category"
+        android:paddingHorizontal="10dp"
+        android:layout_marginVertical="15dp"
+        android:paddingVertical="1dp"
+        android:background="@drawable/edit_text_style"
+
+        app:layout_constraintEnd_toEndOf="@+id/img_itemDetail_picture"
+        app:layout_constraintTop_toBottomOf="@+id/img_itemDetail_picture" />
+
+    <TextView
+        android:id="@+id/tv_itemDetail_itemTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/nunito_medium"
+        android:text="@string/product_title"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="@+id/img_itemDetail_picture"
+        app:layout_constraintTop_toBottomOf="@+id/tv_itemDetail_category" />
+
+    <TextView
+        android:id="@+id/tv_itemDetail_description"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/nunito"
+        android:text="@string/product_description"
+        app:layout_constraintEnd_toEndOf="@+id/img_itemDetail_picture"
+        app:layout_constraintStart_toStartOf="@+id/tv_itemDetail_itemTitle"
+        app:layout_constraintTop_toBottomOf="@+id/tv_itemDetail_itemTitle" />
+
+    <Button
+        android:id="@+id/btn_itemDetail_back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/back"
+        android:theme="@style/ButtonActionTheme"
+        app:cornerRadius="10dp"
+        android:paddingHorizontal="22dp"
+        android:layout_marginTop="40dp"
+        android:paddingVertical="8dp"
+        android:backgroundTint="@color/black"
+        app:layout_constraintStart_toStartOf="@+id/tv_itemDetail_description"
+        app:layout_constraintTop_toBottomOf="@+id/tv_itemDetail_description" />
+
+    <Button
+        android:id="@+id/btn_itemDetail_editItem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/black"
+        android:visibility="gone"
+        android:paddingHorizontal="34dp"
+        android:paddingVertical="8dp"
+        android:text="@string/edit_label"
+        android:theme="@style/ButtonActionTheme"
+        app:cornerRadius="10dp"
+        app:layout_constraintEnd_toEndOf="@+id/img_itemDetail_picture"
+        app:layout_constraintTop_toTopOf="@+id/btn_itemDetail_back" />
+</androidx.constraintlayout.widget.ConstraintLayout>

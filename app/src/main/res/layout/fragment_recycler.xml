@@ -5,7 +5,7 @@
     android:id="@+id/cl_fmt"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".RecyclerFragment">
+    tools:context=".mainRecyclerView.RecyclerFragment">
 
 
     <androidx.recyclerview.widget.RecyclerView
