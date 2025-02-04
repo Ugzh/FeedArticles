@@ -77,7 +77,7 @@
         app:layout_constraintTop_toBottomOf="@+id/rv_editItemDetail" />
 
     <Button
-        android:id="@+id/btn_itemDetail_editItem"
+        android:id="@+id/btn_editItemDetail_editItem"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:backgroundTint="@color/black"

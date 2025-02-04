@@ -28,32 +28,56 @@ class ItemDetailActivity : AppCompatActivity() {
             .getParcelableExtra(RecyclerFragment.KEY_USER_TO_DETAIL_ACTIVITY)
         val itemData : ItemDto?  = intent
             .getParcelableExtra(RecyclerFragment.KEY_ITEM_TO_DETAIL_ACTIVITY)
+        val tvCategory : TextView = findViewById(R.id.tv_itemDetail_category)
+        val tvTitle = findViewById<TextView>(R.id.tv_itemDetail_secondTitle)
+        val tvItemTitle : TextView = findViewById(R.id.tv_itemDetail_itemTitle)
+        val tvDescription : TextView = findViewById(R.id.tv_itemDetail_description)
+        val image = findViewById<ImageView>(R.id.img_itemDetail_picture)
 
         itemData?.let {
-            val urlImage = findViewById<ImageView>(R.id.img_itemDetail_picture)
             findViewById<TextView>(R.id.tv_itemDetail_secondTitle).text = it.title
-            findViewById<TextView>(R.id.tv_itemDetail_category).text = when(it.category){
-                                                                            1 -> "Sport"
-                                                                            2 -> "Manga"
-                                                                            3 -> "Divers"
-                                                                            else -> "Inconnu"
-                                                                        }
-            findViewById<TextView>(R.id.tv_itemDetail_itemTitle).text = it.title
-            findViewById<TextView>(R.id.tv_itemDetail_description).text = it.description
+            tvCategory.text = when(it.category){
+                1 -> "Sport"
+                2 -> "Manga"
+                3 -> "Divers"
+                else -> "Inconnu"
+            }
+            tvItemTitle.text = it.title
+            tvDescription.text = it.description
 
             Picasso
                 .get()
                 .load(it.urlImage.ifEmpty { "boo" })
                 .placeholder(android.R.drawable.ic_menu_search)
                 .error(android.R.drawable.stat_notify_error)
-                .into(urlImage)
-
+                .into(image)
         }
 
         userData?.let {
-            val registerEditItemDetailDto = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
-                if(it.resultCode == Activity.RESULT_OK){
+            val registerEditItemDetailDto = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){ activity ->
+                if(activity.resultCode == Activity.RESULT_OK){
+                    activity.data?.let {intent ->
+                        intent.getParcelableExtra<ItemDto?>(EditItemDetailActivity.KEY_ITEM_UPDATED_FOR_ITEM_DETAIL)?.let { item ->
+                            tvItemTitle.text = item.title
+                            tvDescription.text = item.description
+                            Log.d("test", item.category.toString())
+                            tvCategory.text= when(item.category){
+                                1 -> "Sport"
+                                2 -> "Manga"
+                                3 -> "Divers"
+                                else -> "Inconnu"
+                            }
+                            tvTitle.text = item.title
+                            Picasso
+                                .get()
+                                .load(item.urlImage.ifEmpty { "boo" })
+                                .placeholder(android.R.drawable.ic_menu_search)
+                                .error(android.R.drawable.stat_notify_error)
+                                .into(image)
+                        }
 
+
+                    }
                 }
             }
 
@@ -63,6 +87,7 @@ class ItemDetailActivity : AppCompatActivity() {
                     btn.setOnClickListener {
                         registerEditItemDetailDto.launch(Intent(this, EditItemDetailActivity::class.java).apply {
                             putExtra(KEY_ITEM_TO_EDIT_ITEM, itemData)
+                            putExtra(KEY_USER_TO_EDIT_ITEM, userData)
                         })
                     }
                 }
@@ -78,5 +103,6 @@ class ItemDetailActivity : AppCompatActivity() {
 
     companion object{
         const val KEY_ITEM_TO_EDIT_ITEM = "KEY_ITEM_TO_EDIT_ITEM"
+        const val KEY_USER_TO_EDIT_ITEM = "KEY_USER_TO_EDIT_ITEM"
     }
 }

@@ -4,9 +4,10 @@ import com.example.feedarticles.dtos.GetAllItemsDto
 import com.example.feedarticles.dtos.GetItemByIdDto
 import com.example.feedarticles.dtos.ItemDto
 import com.example.feedarticles.dtos.NewItemDto
-import com.example.feedarticles.dtos.NewResponseDto
+import com.example.feedarticles.dtos.DeleteUpdateNewResponseDto
 import com.example.feedarticles.dtos.RegisterAndLoginDto
 import com.example.feedarticles.dtos.RegisterAndLoginResponseDto
+import com.example.feedarticles.dtos.UpdateItemDto
 import com.example.feedarticles.dtos.UserDto
 import retrofit2.Call
 import retrofit2.Callback
@@ -75,8 +76,6 @@ fun getAllItems(user : UserDto, sendItemsOrMessageCallback: (List<ItemDto>?, Str
                     "error_param" -> sendItemsOrMessageCallback(null, "Erreur de paramètre")
                     else -> sendItemsOrMessageCallback(null, "Problème avec la base de données")
                 }
-
-
             }
         }
 
@@ -114,9 +113,9 @@ fun getItemById(item: ItemDto, user: UserDto, sendItemOrMessageCallback: (ItemDt
 -1: problème de paramètre
 -5: création non autorisée*/
 fun createNewItem(newItemDto: NewItemDto, sendResponseCall : (Boolean) -> Unit){
-    val call : Call<NewResponseDto>? = ApiService.getApi().createNewItem(newItemDto)
-    call?.enqueue(object: Callback<NewResponseDto>{
-        override fun onResponse(call: Call<NewResponseDto>, response: Response<NewResponseDto>) {
+    val call : Call<DeleteUpdateNewResponseDto>? = ApiService.getApi().createNewItem(newItemDto)
+    call?.enqueue(object: Callback<DeleteUpdateNewResponseDto>{
+        override fun onResponse(call: Call<DeleteUpdateNewResponseDto>, response: Response<DeleteUpdateNewResponseDto>) {
             response.body()?.let {
                 when(it.status){
                     1 -> sendResponseCall(true)
@@ -125,8 +124,32 @@ fun createNewItem(newItemDto: NewItemDto, sendResponseCall : (Boolean) -> Unit){
             }
         }
 
-        override fun onFailure(call: Call<NewResponseDto>, t: Throwable) {
+        override fun onFailure(call: Call<DeleteUpdateNewResponseDto>, t: Throwable) {
             TODO("Not yet implemented")
+        }
+
+    })
+}
+
+fun updateItem(updateItemDto: UpdateItemDto, sendResponseCall : (Boolean, String) -> Unit){
+    val call : Call<DeleteUpdateNewResponseDto>? = ApiService.getApi().updateItem(updateItemDto)
+    call?.enqueue(object: Callback<DeleteUpdateNewResponseDto>{
+        override fun onResponse(
+            call: Call<DeleteUpdateNewResponseDto>,
+            response: Response<DeleteUpdateNewResponseDto>
+        ) {
+            response.body()?.let {
+                when(it.status){
+                    1 -> sendResponseCall(true, "Les modifications ont bien été prises en compte")
+                    0 -> sendResponseCall(false, "pas de modifcation effectuée")
+                    -5 -> sendResponseCall(false, "Vous n'avez pas les autorisations pour faire ces modifications")
+                    else -> sendResponseCall(false, "Un problème est survenue")
+                }
+            }
+        }
+
+        override fun onFailure(call: Call<DeleteUpdateNewResponseDto>, t: Throwable) {
+            sendResponseCall(false, "Un problème est survenue")
         }
 
     })

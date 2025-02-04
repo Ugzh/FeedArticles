@@ -3,8 +3,9 @@ package com.example.feedarticles.network
 import com.example.feedarticles.dtos.GetAllItemsDto
 import com.example.feedarticles.dtos.GetItemByIdDto
 import com.example.feedarticles.dtos.NewItemDto
-import com.example.feedarticles.dtos.NewResponseDto
+import com.example.feedarticles.dtos.DeleteUpdateNewResponseDto
 import com.example.feedarticles.dtos.RegisterAndLoginResponseDto
+import com.example.feedarticles.dtos.UpdateItemDto
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.Field
@@ -30,5 +31,8 @@ interface ApiInterface {
 
     //{"id_u":1,"title":"test","desc":"test","image":"http","cat":1,"token":"t3s7"}
     @POST(ApiRoutes.NEW)
-    fun createNewItem(@Body newItemDto: NewItemDto) : Call<NewResponseDto>?
+    fun createNewItem(@Body newItemDto: NewItemDto) : Call<DeleteUpdateNewResponseDto>?
+
+    @POST(ApiRoutes.UPDATE)
+    fun updateItem(@Body updateIemDto: UpdateItemDto) : Call<DeleteUpdateNewResponseDto>?
 }
