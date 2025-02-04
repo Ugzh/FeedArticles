@@ -15,7 +15,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.feedarticles.ItemDetailActivity
 import com.example.feedarticles.R
+import com.example.feedarticles.dtos.NewItemDto
 import com.example.feedarticles.dtos.UserDto
+import com.example.feedarticles.network.createNewItem
 import com.example.feedarticles.network.getAllItems
 import com.example.feedarticles.network.getItemById
 
@@ -54,6 +56,7 @@ class RecyclerFragment() : Fragment() {
                 }
             }
         }
+
         rv.apply {
             layoutManager = LinearLayoutManager(view.context)
             user?.let {
@@ -68,6 +71,14 @@ class RecyclerFragment() : Fragment() {
             }
             refresh(view)
         }
+
+        user?.let {
+            /*createNewItem(NewItemDto(user?.id!!, "Pardon, tu préfères lui ?", "x","https://cdn.countryflags.com/thumbs/brazil/flag-800.png",1, user?.token!!)){
+                if(it)
+                    refresh(view)
+            }*/
+        }
+
         return view
     }
 

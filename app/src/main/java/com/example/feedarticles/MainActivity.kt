@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentTransaction
 import com.example.feedarticles.connexionActivities.LoginActivity
+import com.example.feedarticles.dtos.NewItemDto
 import com.example.feedarticles.dtos.UserDto
 import com.example.feedarticles.mainRecyclerView.RecyclerFragment
 import java.lang.Exception

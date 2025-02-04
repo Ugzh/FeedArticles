@@ -3,6 +3,8 @@ package com.example.feedarticles.network
 import com.example.feedarticles.dtos.GetAllItemsDto
 import com.example.feedarticles.dtos.GetItemByIdDto
 import com.example.feedarticles.dtos.ItemDto
+import com.example.feedarticles.dtos.NewItemDto
+import com.example.feedarticles.dtos.NewResponseDto
 import com.example.feedarticles.dtos.RegisterAndLoginDto
 import com.example.feedarticles.dtos.RegisterAndLoginResponseDto
 import com.example.feedarticles.dtos.UserDto
@@ -84,6 +86,7 @@ fun getAllItems(user : UserDto, sendItemsOrMessageCallback: (List<ItemDto>?, Str
     })
 }
 
+
 fun getItemById(item: ItemDto, user: UserDto, sendItemOrMessageCallback: (ItemDto?, String?) -> Unit){
     val call : Call<GetItemByIdDto>? = ApiService.getApi().getItemById(item.id, user.token)
     call?.enqueue(object: Callback<GetItemByIdDto>{
@@ -100,6 +103,30 @@ fun getItemById(item: ItemDto, user: UserDto, sendItemOrMessageCallback: (ItemDt
 
         override fun onFailure(call: Call<GetItemByIdDto>, t: Throwable) {
             sendItemOrMessageCallback(null, "Problème avec la base de données")
+        }
+
+    })
+}
+
+
+/*status => 1 : OK
+0 : pas de création
+-1: problème de paramètre
+-5: création non autorisée*/
+fun createNewItem(newItemDto: NewItemDto, sendResponseCall : (Boolean) -> Unit){
+    val call : Call<NewResponseDto>? = ApiService.getApi().createNewItem(newItemDto)
+    call?.enqueue(object: Callback<NewResponseDto>{
+        override fun onResponse(call: Call<NewResponseDto>, response: Response<NewResponseDto>) {
+            response.body()?.let {
+                when(it.status){
+                    1 -> sendResponseCall(true)
+                    else -> sendResponseCall(false)
+                }
+            }
+        }
+
+        override fun onFailure(call: Call<NewResponseDto>, t: Throwable) {
+            TODO("Not yet implemented")
         }
 
     })
