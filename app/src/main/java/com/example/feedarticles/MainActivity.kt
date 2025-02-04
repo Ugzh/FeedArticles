@@ -3,13 +3,16 @@ package com.example.feedarticles
 import android.content.Intent
 import android.os.Bundle
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.feedarticles.connexionActivities.LoginActivity
 import com.example.feedarticles.dtos.ItemDto
 import com.example.feedarticles.dtos.UserDto
 import com.example.feedarticles.mainRecyclerView.ItemsAdapter
+import java.lang.Exception
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,8 +28,17 @@ class MainActivity : AppCompatActivity() {
             finish()
         }
 
-        val itemAdapter: ItemsAdapter = ItemsAdapter().apply {
-            setItems(arrayListOf(ItemDto("test", "x", 1, "x", 0, "x"),ItemDto("test2", "x", 2, "x", 0, "x")))
+        val ft: FragmentTransaction = supportFragmentManager.beginTransaction()
+        val recyclerFragment = RecyclerFragment.newInstance(userData ?: UserDto(1,"Ugo","ugo123","acc90621a6f4d008a58d9683d34ee518"))
+        ft.apply {
+            replace(R.id.fl_main,recyclerFragment)
+            addToBackStack(null)
+            setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+        }
+        try {
+            ft.commit()
+        } catch (ex : Exception){
+            Toast.makeText(this, "Impossible de récupérer les informations de la base de données", Toast.LENGTH_SHORT).show()
         }
 
         /*val rv = findViewById<RecyclerView>(R.id.rv_items)

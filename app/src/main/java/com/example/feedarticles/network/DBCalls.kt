@@ -1,5 +1,7 @@
 package com.example.feedarticles.network
 
+import com.example.feedarticles.dtos.GetAllItemsDto
+import com.example.feedarticles.dtos.ItemDto
 import com.example.feedarticles.dtos.RegisterAndLoginDto
 import com.example.feedarticles.dtos.RegisterAndLoginResponseDto
 import com.example.feedarticles.dtos.UserDto
@@ -57,4 +59,22 @@ fun loginUser(user : RegisterAndLoginDto, sendUserOrMessageCallback : (UserDto?,
         }
 
     })
+}
+
+fun getAllItems(user : UserDto, sendItemsCallback: (List<ItemDto>) -> Unit){
+    val call : Call<GetAllItemsDto>? = ApiService.getApi().getAllItems(user.token)
+    call?.enqueue(object : Callback<GetAllItemsDto>{
+        override fun onResponse(call: Call<GetAllItemsDto>, response: Response<GetAllItemsDto>) {
+            response.body()?.let {
+                if(it.status == "ok")
+                    sendItemsCallback(it.items)
+            }
+        }
+
+        override fun onFailure(call: Call<GetAllItemsDto>, t: Throwable) {
+            TODO("Not yet implemented")
+        }
+
+    })
+
 }

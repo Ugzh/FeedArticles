@@ -8,6 +8,7 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.feedarticles.R
 import com.example.feedarticles.dtos.ItemDto
+import com.squareup.picasso.Picasso
 
 class ItemsAdapter: RecyclerView.Adapter<ItemsHolder>() {
     private val itemsList = mutableListOf<ItemDto>()
@@ -44,6 +45,13 @@ class ItemsAdapter: RecyclerView.Adapter<ItemsHolder>() {
                         else -> return
                     }
                 }
+
+                Picasso
+                    .get()
+                    .load(it.urlImage.ifEmpty { "" })
+                    .placeholder(android.R.drawable.ic_menu_search)
+                    .error(android.R.drawable.stat_notify_error)
+                    .into(ivPicture)
             }
         }
     }

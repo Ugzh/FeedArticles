@@ -7,30 +7,49 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.feedarticles.dtos.ItemDto
+import com.example.feedarticles.dtos.UserDto
 import com.example.feedarticles.mainRecyclerView.ItemsAdapter
+import com.example.feedarticles.network.getAllItems
 
-class RecyclerFragment : Fragment() {
+private const val ARG_USER = "ARG_USER"
+class RecyclerFragment() : Fragment() {
+    private var user: UserDto? = null
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        arguments?.let {
+            user = it.getParcelable(ARG_USER)
+        }
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        //return inflater.inflate(R.layout.fragment_main, container, false)
-        val view : View = inflater.inflate(R.layout.fragment_main, container, false)
-
-        val itemAdapter: ItemsAdapter = ItemsAdapter().apply {
-            setItems(arrayListOf(
-                ItemDto("test", "x", 1, "x", 0, "x"),
-                ItemDto("test2", "x", 2, "x", 0, "x")
-            ))
-        }
+        val view : View = inflater.inflate(R.layout.fragment_recycler, container, false)
 
         val rv = view.findViewById<RecyclerView>(R.id.rv_items)
         rv.apply {
             layoutManager = LinearLayoutManager(view.context)
-            adapter = itemAdapter
+            user?.let {
+                getAllItems(it){
+                    adapter = ItemsAdapter().apply {
+                        setItems(it)
+                    }
+                }
+            }
         }
         return view
+    }
+
+    companion object {
+        @JvmStatic
+        fun newInstance(user : UserDto) =
+            RecyclerFragment().apply {
+                arguments = Bundle().apply {
+                    putParcelable(ARG_USER, user)
+
+                }
+            }
     }
 }

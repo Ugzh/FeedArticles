@@ -4,4 +4,5 @@ object ApiRoutes {
     const val BASE_URL = "https://formation.dev2.dev-id.fr/articles/"
     const val REGISTER = "register.php"
     const val LOGIN = "login.php"
+    const val ITEMS = "articles.php"
 }
