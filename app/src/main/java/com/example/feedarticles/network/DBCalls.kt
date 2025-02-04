@@ -1,6 +1,7 @@
 package com.example.feedarticles.network
 
 import com.example.feedarticles.dtos.GetAllItemsDto
+import com.example.feedarticles.dtos.GetItemByIdDto
 import com.example.feedarticles.dtos.ItemDto
 import com.example.feedarticles.dtos.RegisterAndLoginDto
 import com.example.feedarticles.dtos.RegisterAndLoginResponseDto
@@ -61,20 +62,45 @@ fun loginUser(user : RegisterAndLoginDto, sendUserOrMessageCallback : (UserDto?,
     })
 }
 
-fun getAllItems(user : UserDto, sendItemsCallback: (List<ItemDto>) -> Unit){
+fun getAllItems(user : UserDto, sendItemsOrMessageCallback: (List<ItemDto>?, String?) -> Unit){
     val call : Call<GetAllItemsDto>? = ApiService.getApi().getAllItems(user.token)
     call?.enqueue(object : Callback<GetAllItemsDto>{
         override fun onResponse(call: Call<GetAllItemsDto>, response: Response<GetAllItemsDto>) {
             response.body()?.let {
-                if(it.status == "ok")
-                    sendItemsCallback(it.items)
+                when(it.status){
+                    "ok" -> sendItemsOrMessageCallback(it.items, null)
+                    "unauthorized" -> sendItemsOrMessageCallback(null, "Non autorisé")
+                    "error_param" -> sendItemsOrMessageCallback(null, "Erreur de paramètre")
+                    else -> sendItemsOrMessageCallback(null, "Problème avec la base de données")
+                }
+
+
             }
         }
 
         override fun onFailure(call: Call<GetAllItemsDto>, t: Throwable) {
+            sendItemsOrMessageCallback(null, "Problème avec la base de données")
+        }
+    })
+}
+
+fun getItemById(id : Long, user: UserDto, sendItemOrMessageCallback: (ItemDto?, String?) -> Unit){
+    val call : Call<GetItemByIdDto>? = ApiService.getApi().getItemById(id, user.token)
+    call?.enqueue(object: Callback<GetItemByIdDto>{
+        override fun onResponse(call: Call<GetItemByIdDto>, response: Response<GetItemByIdDto>) {
+            response.body()?.let {
+                when(it.status){
+                    "ok" -> sendItemOrMessageCallback(it.item, null)
+                    "unauthorized" -> sendItemOrMessageCallback(null, "Non autorisé")
+                    "error_param" -> sendItemOrMessageCallback(null, "Erreur de paramètre")
+                    else -> sendItemOrMessageCallback(null, "Problème avec la base de données")
+                }
+            }
+        }
+
+        override fun onFailure(call: Call<GetItemByIdDto>, t: Throwable) {
             TODO("Not yet implemented")
         }
 
     })
-
 }

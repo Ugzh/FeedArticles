@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.feedarticles.dtos.UserDto
@@ -32,13 +33,22 @@ class RecyclerFragment() : Fragment() {
         rv.apply {
             layoutManager = LinearLayoutManager(view.context)
             user?.let {
-                getAllItems(it){
-                    adapter = ItemsAdapter().apply {
-                        setItems(it)
+                getAllItems(it){ list, message ->
+
+                    list?.let {
+                        adapter = ItemsAdapter().apply {
+                            setItems(it)
+                        }
                     }
+
+                    message?.let {
+                        Toast.makeText(view.context, message, Toast.LENGTH_SHORT).show()
+                    }
+
                 }
             }
         }
+
         return view
     }
 

@@ -1,6 +1,7 @@
 package com.example.feedarticles.network
 
 import com.example.feedarticles.dtos.GetAllItemsDto
+import com.example.feedarticles.dtos.GetItemByIdDto
 import com.example.feedarticles.dtos.RegisterAndLoginResponseDto
 import retrofit2.Call
 import retrofit2.http.Field
@@ -20,5 +21,8 @@ interface ApiInterface {
 
     @GET(ApiRoutes.ITEMS)
     fun getAllItems(@Query("token") token: String) : Call<GetAllItemsDto>?
+
+    @GET(ApiRoutes.ITEM)
+    fun getItemById(@Query("id") idItem : Long ,@Query("token") token: String) : Call<GetItemByIdDto>?
 
 }

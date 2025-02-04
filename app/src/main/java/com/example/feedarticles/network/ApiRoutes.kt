@@ -5,4 +5,5 @@ object ApiRoutes {
     const val REGISTER = "register.php"
     const val LOGIN = "login.php"
     const val ITEMS = "articles.php"
+    const val ITEM = "article.php"
 }

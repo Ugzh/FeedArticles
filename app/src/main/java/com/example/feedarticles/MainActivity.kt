@@ -40,11 +40,5 @@ class MainActivity : AppCompatActivity() {
         } catch (ex : Exception){
             Toast.makeText(this, "Impossible de récupérer les informations de la base de données", Toast.LENGTH_SHORT).show()
         }
-
-        /*val rv = findViewById<RecyclerView>(R.id.rv_items)
-        rv.apply {
-            layoutManager = LinearLayoutManager(this@MainActivity)
-            adapter = itemAdapter
-        }*/
     }
 }
