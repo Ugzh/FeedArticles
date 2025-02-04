@@ -44,9 +44,6 @@ class ItemsAdapter: RecyclerView.Adapter<ItemsHolder>() {
                         else -> return
                     }
                 }
-
-
-
             }
         }
     }

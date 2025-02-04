@@ -29,10 +29,10 @@ class MainActivity : AppCompatActivity() {
             setItems(arrayListOf(ItemDto("test", "x", 1, "x", 0, "x"),ItemDto("test2", "x", 2, "x", 0, "x")))
         }
 
-        val rv = findViewById<RecyclerView>(R.id.rv_items)
+        /*val rv = findViewById<RecyclerView>(R.id.rv_items)
         rv.apply {
             layoutManager = LinearLayoutManager(this@MainActivity)
             adapter = itemAdapter
-        }
+        }*/
     }
 }
