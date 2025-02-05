@@ -41,6 +41,7 @@
 
     <EditText
         android:id="@+id/et_editItemDetail_itemTitle"
+        android:maxLength="80"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
@@ -58,6 +59,7 @@
         android:layout_marginTop="10dp"
         android:fontFamily="@font/nunito"
         android:text="@string/product_description"
+        android:inputType="textMultiLine"
         app:layout_constraintEnd_toEndOf="@+id/img_editItemDetail_picture"
         app:layout_constraintStart_toStartOf="@+id/et_editItemDetail_itemTitle"
         app:layout_constraintTop_toBottomOf="@+id/et_editItemDetail_itemTitle" />

@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentTransaction
 import com.example.feedarticles.R
+import com.example.feedarticles.Utils
 import com.example.feedarticles.categoryRecyclerView.Category
 import com.example.feedarticles.categoryRecyclerView.CategoryFragment
 import com.example.feedarticles.dtos.ItemDto
@@ -32,7 +33,7 @@ class EditItemDetailActivity : AppCompatActivity() {
         val etDescription = findViewById<EditText>(R.id.et_editItemDetail_description)
 
         val ft: FragmentTransaction = supportFragmentManager.beginTransaction()
-        val categoryFragment = CategoryFragment.newInstance(arrayListOf(Category("Sport"), Category("Manga"), Category("Divers")))
+        val categoryFragment = CategoryFragment.newInstance(Utils.arrayListOfCategoriesWithoutAll)
 
         ft.apply {
             replace(R.id.fl_editItemDetail_rvCategory,categoryFragment)
@@ -75,7 +76,6 @@ class EditItemDetailActivity : AppCompatActivity() {
             val itemTitle = etItemTile.text.toString().trim()
             val itemDescription = etDescription.text.toString().trim()
             val itemUrlImage = etUrlImage.text.toString().trim()
-            //Log.d("test",  categoryFragment.getCategoryNum().toString())
 
             updateItem(UpdateItemDto(itemId,
                 itemTitle,

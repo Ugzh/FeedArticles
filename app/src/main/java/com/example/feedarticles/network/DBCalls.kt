@@ -112,20 +112,23 @@ fun getItemById(item: ItemDto, user: UserDto, sendItemOrMessageCallback: (ItemDt
 0 : pas de création
 -1: problème de paramètre
 -5: création non autorisée*/
-fun createNewItem(newItemDto: NewItemDto, sendResponseCall : (Boolean) -> Unit){
+fun createNewItem(newItemDto: NewItemDto, sendResponseCallback : (Boolean, String?) -> Unit){
     val call : Call<DeleteUpdateNewResponseDto>? = ApiService.getApi().createNewItem(newItemDto)
     call?.enqueue(object: Callback<DeleteUpdateNewResponseDto>{
         override fun onResponse(call: Call<DeleteUpdateNewResponseDto>, response: Response<DeleteUpdateNewResponseDto>) {
             response.body()?.let {
                 when(it.status){
-                    1 -> sendResponseCall(true)
-                    else -> sendResponseCall(false)
+                    1 -> sendResponseCallback(true, null)
+                    0 -> sendResponseCallback(false, "Article non crée")
+                    -1 -> sendResponseCallback(false, "Vérifiez vos paramètres")
+                    -5 -> sendResponseCallback(false, "Vous n'avez pas le droit d'effectuer cette action")
+                    else -> return
                 }
             }
         }
 
         override fun onFailure(call: Call<DeleteUpdateNewResponseDto>, t: Throwable) {
-            TODO("Not yet implemented")
+            sendResponseCallback(false, "Problème avec la base de données")
         }
 
     })

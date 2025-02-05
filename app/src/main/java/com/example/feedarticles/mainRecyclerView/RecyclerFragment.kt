@@ -73,7 +73,7 @@ class RecyclerFragment() : Fragment() {
         super.onViewCreated(view, savedInstanceState)
     }
 
-    private fun refresh(view: View){
+    fun refresh(view: View){
         user?.let {
             getAllItems(it) { list, message ->
                 list?.let { item ->

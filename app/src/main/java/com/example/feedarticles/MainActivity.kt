@@ -2,6 +2,7 @@ package com.example.feedarticles
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
@@ -38,7 +39,7 @@ class MainActivity : AppCompatActivity() {
 
         val ft: FragmentTransaction = supportFragmentManager.beginTransaction()
         val recyclerFragment = RecyclerFragment.newInstance(userData ?: UserDto(1,"Ugo","ugo123","4c70ecf0c8bd69311a7634e0d38f4694"))
-        val categoryFragment = CategoryFragment.newInstance(arrayListOf(Category("Sport"), Category("Manga"), Category("Divers"), Category("Tous")))
+        val categoryFragment = CategoryFragment.newInstance(Utils.arrayListOfAllCategories)
         ft.apply {
             replace(R.id.fl_main_rvCategory,categoryFragment)
             replace(R.id.fl_main_rvMain,recyclerFragment)
@@ -49,7 +50,11 @@ class MainActivity : AppCompatActivity() {
             Toast.makeText(this, "Impossible de récupérer les informations de la base de données", Toast.LENGTH_SHORT).show()
         }
 
-        val registerCreateItemForResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){}
+        val registerCreateItemForResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
+            if (it.resultCode == RESULT_OK){
+                recyclerFragment.refresh(findViewById(android.R.id.content))
+            }
+        }
 
         findViewById<Button>(R.id.btn_main_addItem).setOnClickListener {
             registerCreateItemForResult.launch(Intent(this, CreateItemActivity::class.java).apply { putExtra(KEY_USER_DATA_TO_CREATE_ITEM, userData) })
