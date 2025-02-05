@@ -3,10 +3,15 @@ package com.example.feedarticles
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentTransaction
+import com.example.feedarticles.categoryRecyclerView.Category
+import com.example.feedarticles.categoryRecyclerView.CategoryFragment
 import com.example.feedarticles.connexionActivities.LoginActivity
 import com.example.feedarticles.dtos.NewItemDto
 import com.example.feedarticles.dtos.UserDto
@@ -27,17 +32,28 @@ class MainActivity : AppCompatActivity() {
             startActivity(Intent(this, LoginActivity::class.java))
             finish()
         }
+        findViewById<ImageView>(R.id.img_main_logout).setOnClickListener{
+            startActivity(Intent(this, LoginActivity::class.java))
+            finish()
+        }
 
         val ft: FragmentTransaction = supportFragmentManager.beginTransaction()
         val recyclerFragment = RecyclerFragment.newInstance(userData ?: UserDto(1,"Ugo","ugo123","4c70ecf0c8bd69311a7634e0d38f4694"))
+        val categoryFragment = CategoryFragment.newInstance(arrayListOf(Category("Sport"), Category("Manga"), Category("Divers"), Category("Tous")))
         ft.apply {
-            replace(R.id.fl_main,recyclerFragment)
-            setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+            replace(R.id.fl_main_rvCategory,categoryFragment)
+            replace(R.id.fl_main_rvMain,recyclerFragment)
         }
         try {
             ft.commit()
         } catch (ex : Exception){
             Toast.makeText(this, "Impossible de récupérer les informations de la base de données", Toast.LENGTH_SHORT).show()
+        }
+
+        val registerCreateItemForResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){}
+
+        findViewById<Button>(R.id.btn_main_addItem).setOnClickListener {
+            //registerCreateItemForResult.launch()
         }
     }
 }

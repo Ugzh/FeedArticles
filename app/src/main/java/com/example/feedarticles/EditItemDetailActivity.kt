@@ -15,22 +15,25 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.feedarticles.categoryRecyclerView.Category
 import com.example.feedarticles.categoryRecyclerView.CategoryAdapter
+import com.example.feedarticles.categoryRecyclerView.CategoryFragment
 import com.example.feedarticles.dtos.ItemDto
 import com.example.feedarticles.dtos.UpdateItemDto
 import com.example.feedarticles.dtos.UserDto
 import com.example.feedarticles.mainRecyclerView.ItemsAdapter
+import com.example.feedarticles.mainRecyclerView.RecyclerFragment
 import com.example.feedarticles.network.updateItem
 import com.squareup.picasso.Picasso
+import java.lang.Exception
 
 class EditItemDetailActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_edit_item_detail)
-        val list = listOf(Category("Sport"), Category("Manga"), Category("Divers"))
         val item : ItemDto? = intent.getParcelableExtra(ItemDetailActivity.KEY_ITEM_TO_EDIT_ITEM)
         val user : UserDto? = intent.getParcelableExtra(ItemDetailActivity.KEY_USER_TO_EDIT_ITEM)
         val ivImage = findViewById<ImageView>(R.id.img_editItemDetail_picture)
@@ -38,9 +41,18 @@ class EditItemDetailActivity : AppCompatActivity() {
         val etItemTile = findViewById<EditText>(R.id.et_editItemDetail_itemTitle)
         val tvSecondTitle = findViewById<TextView>(R.id.tv_editItemDetail_secondTitle)
         val etDescription = findViewById<EditText>(R.id.et_editItemDetail_description)
-        var categoryAdapter : CategoryAdapter? = null
-        var categoryNum = 0
-        val pbLoader = findViewById<ProgressBar>(R.id.pb_editItemDetail_loader)
+
+        val ft: FragmentTransaction = supportFragmentManager.beginTransaction()
+        val categoryFragment = CategoryFragment.newInstance(arrayListOf(Category("Sport"), Category("Manga"), Category("Divers")))
+
+        ft.apply {
+            replace(R.id.fl_editItemDetail_rvCategory,categoryFragment)
+        }
+        try {
+            ft.commit()
+        } catch (ex : Exception){
+            Toast.makeText(this, "Impossible de récupérer les informations de la base de données", Toast.LENGTH_SHORT).show()
+        }
 
         etUrlImage.setOnFocusChangeListener(){ view, isFocus ->
             if(!isFocus){
@@ -69,45 +81,21 @@ class EditItemDetailActivity : AppCompatActivity() {
                 .into(ivImage)
         }
 
-        val rv = findViewById<RecyclerView>(R.id.rv_editItemDetail)
-
-        categoryAdapter = CategoryAdapter().apply {
-            setCategories(list)
-        }
-
-        rv.apply {
-            layoutManager = LinearLayoutManager(this@EditItemDetailActivity, LinearLayoutManager.HORIZONTAL, false)
-            adapter = categoryAdapter
-        }
-
-        categoryAdapter.apply {
-            setSendCategoryCallback {
-
-                categoryNum = when(it){
-                    "Sport" -> 1
-                    "Manga" -> 2
-                    "Divers" -> 3
-                    else -> return@setSendCategoryCallback
-                }
-            }
-        }
-
         findViewById<Button>(R.id.btn_editItemDetail_editItem).setOnClickListener {
             val itemId = item?.id!!
             val itemTitle = etItemTile.text.toString().trim()
             val itemDescription = etDescription.text.toString().trim()
             val itemUrlImage = etUrlImage.text.toString().trim()
+            //Log.d("test",  categoryFragment.getCategoryNum().toString())
 
-
-            pbLoader.visibility = View.VISIBLE
             updateItem(UpdateItemDto(itemId,
                 itemTitle,
                 itemDescription,
                 itemUrlImage,
-                categoryNum, user?.token!!)){ isInsert, message ->
+                categoryFragment.getCategoryNum(), user?.token!!)){ isInsert, message ->
 
                 if(isInsert){
-                    setResult(RESULT_OK, Intent().putExtra(KEY_ITEM_UPDATED_FOR_ITEM_DETAIL,ItemDto(itemId,itemTitle,itemDescription, itemUrlImage, categoryNum, item.createdAt, user.id)))
+                    setResult(RESULT_OK, Intent().putExtra(KEY_ITEM_UPDATED_FOR_ITEM_DETAIL,ItemDto(itemId,itemTitle,itemDescription, itemUrlImage, categoryFragment.getCategoryNum(), item.createdAt, user.id)))
                     finish()
                 } else {
                     setResult(RESULT_CANCELED)
@@ -117,8 +105,6 @@ class EditItemDetailActivity : AppCompatActivity() {
                 Toast.makeText(this@EditItemDetailActivity, message,
                     Toast.LENGTH_SHORT).show()
             }
-            pbLoader.visibility = View.GONE
-
 
         }
         etUrlImage.setOnFocusChangeListener(){ _, hasFocus ->
@@ -141,6 +127,11 @@ class EditItemDetailActivity : AppCompatActivity() {
                     tvSecondTitle.text = titleText
                 }
             }
+        }
+
+        findViewById<Button>(R.id.btn_editItemDetail_back).setOnClickListener{
+            setResult(RESULT_CANCELED)
+            finish()
         }
     }
     companion object{

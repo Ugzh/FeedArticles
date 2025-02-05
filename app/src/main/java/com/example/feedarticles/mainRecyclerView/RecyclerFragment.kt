@@ -71,14 +71,6 @@ class RecyclerFragment() : Fragment() {
             }
             refresh(view)
         }
-
-        user?.let {
-            /*createNewItem(NewItemDto(user?.id!!, "Pardon, tu préfères lui ?", "x","https://cdn.countryflags.com/thumbs/brazil/flag-800.png",1, user?.token!!)){
-                if(it)
-                    refresh(view)
-            }*/
-        }
-
         return view
     }
 

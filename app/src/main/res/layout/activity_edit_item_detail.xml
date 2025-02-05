@@ -73,8 +73,8 @@
         android:text="@string/back"
         android:theme="@style/ButtonActionTheme"
         app:cornerRadius="10dp"
-        app:layout_constraintStart_toStartOf="@+id/rv_editItemDetail"
-        app:layout_constraintTop_toBottomOf="@+id/rv_editItemDetail" />
+        app:layout_constraintStart_toStartOf="@+id/fl_editItemDetail_rvCategory"
+        app:layout_constraintTop_toBottomOf="@+id/fl_editItemDetail_rvCategory" />
 
     <Button
         android:id="@+id/btn_editItemDetail_editItem"
@@ -86,7 +86,7 @@
         android:text="@string/confirm_edit_label"
         android:theme="@style/ButtonActionTheme"
         app:cornerRadius="10dp"
-        app:layout_constraintEnd_toEndOf="@+id/rv_editItemDetail"
+        app:layout_constraintEnd_toEndOf="@+id/fl_editItemDetail_rvCategory"
         app:layout_constraintTop_toTopOf="@+id/btn_editItemDetail_back" />
 
     <EditText
@@ -103,14 +103,16 @@
         app:layout_constraintStart_toStartOf="@+id/tv_editItemDetail_secondTitle"
         app:layout_constraintTop_toBottomOf="@+id/tv_editItemDetail_secondTitle" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_editItemDetail"
+
+    <FrameLayout
+        android:id="@+id/fl_editItemDetail_rvCategory"
         android:layout_width="0dp"
         android:layout_height="70dp"
         android:layout_marginTop="10dp"
         app:layout_constraintEnd_toEndOf="@+id/et_editItemDetail_description"
         app:layout_constraintStart_toStartOf="@+id/tv_editItemDetail_category"
-        app:layout_constraintTop_toBottomOf="@+id/tv_editItemDetail_category" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_editItemDetail_category"
+        />
 
     <TextView
         android:id="@+id/tv_editItemDetail_category"
@@ -122,16 +124,5 @@
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="@+id/et_editItemDetail_description"
         app:layout_constraintTop_toBottomOf="@+id/et_editItemDetail_description" />
-
-    <ProgressBar
-        android:id="@+id/pb_editItemDetail_loader"
-        style="?android:attr/progressBarStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:visibility="gone"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

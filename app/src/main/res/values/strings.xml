@@ -28,4 +28,6 @@
     <string name="manga">Manga</string>
     <string name="various">Various</string>
     <string name="unknown">Unknown</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

@@ -31,7 +31,7 @@
         android:id="@+id/tv_main_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
+        android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
         android:text="@string/welcome_title"
         android:theme="@style/FirstTitleTheme"
@@ -49,32 +49,58 @@
         app:layout_constraintStart_toStartOf="@+id/tv_main_title"
         app:layout_constraintTop_toBottomOf="@+id/tv_main_title" />
 
-    <!--<androidx.fragment.app.FragmentContainerView
-        android:id="@+id/fragmentContainerView"
-        android:name="com.example.feedarticles.mainRecyclerView.RecyclerFragment"
+    <FrameLayout
+        android:id="@+id/fl_main_rvMain"
+        android:layout_width="match_parent"
+        android:layout_height="520dp"
         android:layout_marginTop="15dp"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_main_userTitle"
-        app:layout_constraintVertical_bias="0.0" />-->
+        app:layout_constraintTop_toBottomOf="@+id/tv_main_userTitle" >
+
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/tv_main_filter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/filter"
+        android:fontFamily="@font/nunito"
+        android:textSize="20sp"
+        android:layout_marginTop="30dp"
+        app:layout_constraintStart_toStartOf="@+id/tv_main_userTitle"
+        app:layout_constraintTop_toBottomOf="@+id/fl_main_rvMain" />
 
     <FrameLayout
-        android:id="@+id/fl_main"
-        android:layout_marginTop="15dp"
+        android:id="@+id/fl_main_rvCategory"
         android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_height="50dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="20dp"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_main_filter"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/tv_main_filter"
+        app:layout_constraintTop_toTopOf="@+id/tv_main_filter"
+        app:layout_constraintVertical_bias="0.6" />
+
+    <Button
+        android:id="@+id/btn_main_addItem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="@string/new_article"
+        android:theme="@style/ButtonActionTheme"
+        android:textSize="20dp"
+        app:cornerRadius="10dp"
+        android:paddingHorizontal="38dp"
+        android:paddingVertical="8dp"
+        android:backgroundTint="@color/black"
+        android:fontFamily="@font/nunito"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_main_userTitle"
-        app:layout_constraintVertical_bias="0.0" />
-
-
+        app:layout_constraintTop_toBottomOf="@+id/fl_main_rvCategory" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
