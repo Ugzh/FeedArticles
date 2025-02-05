@@ -73,4 +73,5 @@ class ItemsAdapter: RecyclerView.Adapter<ItemsHolder>() {
     fun setItemDetailCallback(itemDetailCallback : (ItemDto) -> Unit ){
         this.itemDetailCallback = itemDetailCallback
     }
+
 }

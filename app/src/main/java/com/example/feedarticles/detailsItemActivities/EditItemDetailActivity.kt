@@ -33,6 +33,7 @@ class EditItemDetailActivity : AppCompatActivity() {
         val etDescription = findViewById<EditText>(R.id.et_editItemDetail_description)
 
         val ft: FragmentTransaction = supportFragmentManager.beginTransaction()
+
         val categoryFragment = CategoryFragment.newInstance(Utils.arrayListOfCategoriesWithoutAll)
 
         ft.apply {

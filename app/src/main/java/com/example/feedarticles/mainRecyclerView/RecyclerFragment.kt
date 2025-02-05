@@ -73,11 +73,15 @@ class RecyclerFragment() : Fragment() {
         super.onViewCreated(view, savedInstanceState)
     }
 
-    fun refresh(view: View){
+    fun refresh(view: View, categoryToFilter : Int? = 0){
         user?.let {
             getAllItems(it) { list, message ->
                 list?.let { item ->
-                   itemsAdapter.setItems(item)
+                   val sortedList = when(categoryToFilter){
+                       1,2,3 -> item.filter { it.category == categoryToFilter }
+                       else -> item
+                   }
+                    itemsAdapter.setItems(sortedList)
                 }
                 message?.let {
                     Toast.makeText(view.context, message, Toast.LENGTH_SHORT).show()
@@ -85,6 +89,7 @@ class RecyclerFragment() : Fragment() {
             }
         }
     }
+
 
     companion object {
         const val KEY_USER_TO_DETAIL_ACTIVITY = "KEY_USER_TO_DETAIL_ACTIVITY"

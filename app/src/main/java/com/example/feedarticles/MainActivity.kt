@@ -39,7 +39,10 @@ class MainActivity : AppCompatActivity() {
 
         val ft: FragmentTransaction = supportFragmentManager.beginTransaction()
         val recyclerFragment = RecyclerFragment.newInstance(userData ?: UserDto(1,"Ugo","ugo123","4c70ecf0c8bd69311a7634e0d38f4694"))
-        val categoryFragment = CategoryFragment.newInstance(Utils.arrayListOfAllCategories)
+        val categoryFragment = CategoryFragment.newInstance(Utils.arrayListOfAllCategories).apply {
+            setFragment(recyclerFragment)
+        }
+
         ft.apply {
             replace(R.id.fl_main_rvCategory,categoryFragment)
             replace(R.id.fl_main_rvMain,recyclerFragment)
@@ -49,6 +52,7 @@ class MainActivity : AppCompatActivity() {
         } catch (ex : Exception){
             Toast.makeText(this, "Impossible de récupérer les informations de la base de données", Toast.LENGTH_SHORT).show()
         }
+
 
         val registerCreateItemForResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
             if (it.resultCode == RESULT_OK){

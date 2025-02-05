@@ -11,11 +11,13 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
 import com.example.feedarticles.R
+import com.example.feedarticles.mainRecyclerView.RecyclerFragment
 
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_LIST_CATEGORY = "ARG_LIST_CATEGORY"
+private const val ARG_FRAGMENT_VIEW = "ARG_FRAGMENT_VIEW"
 
 /**
  * A simple [Fragment] subclass.
@@ -25,12 +27,14 @@ private const val ARG_LIST_CATEGORY = "ARG_LIST_CATEGORY"
 class CategoryFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private lateinit var listCategory: ArrayList<Category>
+    private lateinit var fragment: RecyclerFragment
     private var categoryNum = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
             listCategory = it.getParcelableArrayList(ARG_LIST_CATEGORY)!!
+            //categoryAdapter = it.getParcelable(ARG_ADAPTER_CATEGORY)!!
         }
     }
 
@@ -52,8 +56,10 @@ class CategoryFragment : Fragment() {
                     "Sport" -> 1
                     "Manga" -> 2
                     "Divers" -> 3
-                    else -> return@setSendCategoryCallback
+                    else -> 0
                 }
+
+                fragment.refresh(view, categoryNum)
             }
         }
         return view
@@ -61,12 +67,17 @@ class CategoryFragment : Fragment() {
 
     fun getCategoryNum() = categoryNum
 
+    fun setFragment(fragment: RecyclerFragment){
+        this.fragment = fragment
+    }
+
     companion object {
         @JvmStatic
-        fun newInstance(categoryList : ArrayList<Category>) =
+        fun newInstance(categoryList : ArrayList<Category>, ) =
             CategoryFragment().apply {
                 arguments = Bundle().apply {
                     putParcelableArrayList(ARG_LIST_CATEGORY,categoryList)
+                    //putParcelable(ARG_ADAPTER_CATEGORY,categoryAdapter)
                 }
             }
     }
