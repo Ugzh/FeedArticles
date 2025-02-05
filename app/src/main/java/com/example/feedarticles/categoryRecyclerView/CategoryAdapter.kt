@@ -3,6 +3,7 @@ package com.example.feedarticles.categoryRecyclerView
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.feedarticles.R
 
@@ -22,17 +23,12 @@ class CategoryAdapter: RecyclerView.Adapter<CategoryHolder>() {
     }
 
     override fun onBindViewHolder(holder: CategoryHolder, position: Int) {
+       var count = 0
         with(holder){
-            categoriesList.get(position).let {
-                tvCategory.text = it.name
-                clRv.setOnClickListener{ _->
-                    sendCategoryCallback?.invoke(it.name)
-                   /* when(it.name){
-                        "Sport" -> sendCategoryCallback?.invoke(1)
-                        "Manga" -> sendCategoryCallback?.invoke(2)
-                        "Divers" -> sendCategoryCallback?.invoke(3)
-                        else -> return@setOnClickListener
-                    }*/
+            categoriesList.get(position).let {category ->
+                tvCategory.text = category.name
+                clRv.setOnClickListener{
+                    sendCategoryCallback?.invoke(category.name)
                 }
             }
         }

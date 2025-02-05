@@ -38,6 +38,7 @@ class ItemsAdapter: RecyclerView.Adapter<ItemsHolder>() {
                     else -> return
                 }
                 tvDescription.text = it.description
+
                 clLayout.background.let { _ ->
                     when(it.category){
                         1 -> clLayout.setBackgroundColor(resource.getColor(R.color.sportColor))
