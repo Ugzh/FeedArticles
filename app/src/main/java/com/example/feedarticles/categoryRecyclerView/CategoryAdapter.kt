@@ -39,7 +39,7 @@ class CategoryAdapter() : RecyclerView.Adapter<CategoryHolder>() {
             categoriesList.get(position).let {category ->
                 tvCategory.text = category.name
                 clRv.setOnClickListener{
-                    sendCategoryCallback?.invoke(category.name)
+                    if (selectedPos == position) sendCategoryCallback?.invoke("") else sendCategoryCallback?.invoke(category.name)
 
                     val prevPos = selectedPos
                     selectedPos = if (selectedPos == position) null else position
