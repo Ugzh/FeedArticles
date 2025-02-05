@@ -8,4 +8,5 @@ object ApiRoutes {
     const val ITEM = "article.php"
     const val NEW = "new.php"
     const val UPDATE = "update.php"
+    const val DELETE = "delete.php"
 }

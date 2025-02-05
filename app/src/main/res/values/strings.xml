@@ -29,5 +29,6 @@
     <string name="various">Various</string>
     <string name="unknown">Unknown</string>
     <string name="title">Title</string>
+    <string name="delete">Delete</string>
     <!-- TODO: Remove or change this placeholder text -->
 </resources>

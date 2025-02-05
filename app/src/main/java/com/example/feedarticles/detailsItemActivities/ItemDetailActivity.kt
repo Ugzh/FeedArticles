@@ -8,12 +8,15 @@ import android.view.View
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import com.example.feedarticles.MainActivity
 import com.example.feedarticles.R
 import com.example.feedarticles.dtos.ItemDto
 import com.example.feedarticles.dtos.UserDto
 import com.example.feedarticles.mainRecyclerView.RecyclerFragment
+import com.example.feedarticles.network.deleteItem
 import com.squareup.picasso.Picasso
 
 class ItemDetailActivity : AppCompatActivity() {
@@ -86,6 +89,32 @@ class ItemDetailActivity : AppCompatActivity() {
                             putExtra(KEY_ITEM_TO_EDIT_ITEM, itemData)
                             putExtra(KEY_USER_TO_EDIT_ITEM, userData)
                         })
+                    }
+                }
+
+                findViewById<TextView>(R.id.tv_itemDetail_delete).let {
+                    it.visibility = View.VISIBLE
+                    it.setOnClickListener{
+                        deleteItem(itemData, userData){ isDelete, message ->
+                            if (isDelete){
+                                setResult(RESULT_OK)
+                                finish()
+                            }
+                            Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                }
+
+                findViewById<ImageView>(R.id.iv_itemDetail_trash).let {
+                    it.visibility = View.VISIBLE
+                    it.setOnClickListener{
+                        deleteItem(itemData, userData){ isDelete, message ->
+                            if (isDelete){
+                                setResult(RESULT_OK)
+                                finish()
+                            }
+                            Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+                        }
                     }
                 }
 

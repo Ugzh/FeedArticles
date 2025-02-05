@@ -76,27 +76,50 @@
         android:id="@+id/btn_itemDetail_back"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:backgroundTint="@color/black"
+        android:paddingHorizontal="22dp"
+        android:paddingVertical="8dp"
+        android:layout_marginTop="40dp"
         android:text="@string/back"
         android:theme="@style/ButtonActionTheme"
         app:cornerRadius="10dp"
-        android:paddingHorizontal="22dp"
-        android:layout_marginTop="40dp"
-        android:paddingVertical="8dp"
-        android:backgroundTint="@color/black"
         app:layout_constraintStart_toStartOf="@+id/tv_itemDetail_description"
-        app:layout_constraintTop_toBottomOf="@+id/tv_itemDetail_description" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_itemDetail_delete" />
 
     <Button
         android:id="@+id/btn_itemDetail_editItem"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:backgroundTint="@color/black"
-        android:visibility="gone"
         android:paddingHorizontal="34dp"
         android:paddingVertical="8dp"
+        android:visibility="gone"
         android:text="@string/edit_label"
         android:theme="@style/ButtonActionTheme"
         app:cornerRadius="10dp"
         app:layout_constraintEnd_toEndOf="@+id/img_itemDetail_picture"
         app:layout_constraintTop_toTopOf="@+id/btn_itemDetail_back" />
+
+    <TextView
+        android:id="@+id/tv_itemDetail_delete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/delete"
+        android:fontFamily="@font/nunito_bold"
+        android:visibility="gone"
+        android:textSize="12sp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintEnd_toStartOf="@+id/iv_itemDetail_trash"
+        app:layout_constraintTop_toBottomOf="@+id/tv_itemDetail_description" />
+
+    <ImageView
+        android:id="@+id/iv_itemDetail_trash"
+        android:layout_width="22dp"
+        android:layout_height="22dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_itemDetail_delete"
+        app:layout_constraintEnd_toEndOf="@+id/tv_itemDetail_description"
+        app:layout_constraintTop_toTopOf="@+id/tv_itemDetail_delete"
+        app:srcCompat="@drawable/trash" />
 </androidx.constraintlayout.widget.ConstraintLayout>

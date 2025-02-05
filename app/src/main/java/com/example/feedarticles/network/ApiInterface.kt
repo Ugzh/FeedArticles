@@ -35,4 +35,8 @@ interface ApiInterface {
 
     @POST(ApiRoutes.UPDATE)
     fun updateItem(@Body updateIemDto: UpdateItemDto) : Call<DeleteUpdateNewResponseDto>?
+
+    @FormUrlEncoded
+    @POST(ApiRoutes.DELETE)
+    fun deleteItem(@Field("id") idItem : Long, @Field("token") token: String) : Call<DeleteUpdateNewResponseDto>?
 }

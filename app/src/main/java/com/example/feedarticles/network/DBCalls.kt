@@ -146,7 +146,31 @@ fun updateItem(updateItemDto: UpdateItemDto, sendResponseCall : (Boolean, String
                     1 -> sendResponseCall(true, "Les modifications ont bien été prises en compte")
                     0 -> sendResponseCall(false, "pas de modifcation effectuée")
                     -5 -> sendResponseCall(false, "Vous n'avez pas les autorisations pour faire ces modifications")
-                    else -> sendResponseCall(false, "Un problème est survenue")
+                    else -> sendResponseCall(false, "Un problème est survenu")
+                }
+            }
+        }
+
+        override fun onFailure(call: Call<DeleteUpdateNewResponseDto>, t: Throwable) {
+            sendResponseCall(false, "Un problème est survenu")
+        }
+
+    })
+}
+
+fun deleteItem(item : ItemDto, user: UserDto, sendResponseCall : (Boolean, String) -> Unit){
+    val call : Call<DeleteUpdateNewResponseDto>? = ApiService.getApi().deleteItem(item.id, user.token)
+    call?.enqueue(object: Callback<DeleteUpdateNewResponseDto>{
+        override fun onResponse(
+            call: Call<DeleteUpdateNewResponseDto>,
+            response: Response<DeleteUpdateNewResponseDto>
+        ) {
+            response.body()?.let {
+                when(it.status){
+                    1 -> sendResponseCall(true, "L'article a bien été supprimé")
+                    0 -> sendResponseCall(false, "pas de suppression effectuée")
+                    -5 -> sendResponseCall(false, "Vous n'avez pas les autorisations pour faire cette suppression")
+                    else -> sendResponseCall(false, "Un problème est survenu")
                 }
             }
         }
@@ -155,5 +179,5 @@ fun updateItem(updateItemDto: UpdateItemDto, sendResponseCall : (Boolean, String
             sendResponseCall(false, "Un problème est survenue")
         }
 
-    })
+    } )
 }
