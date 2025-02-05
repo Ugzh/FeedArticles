@@ -13,27 +13,19 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.feedarticles.R
 import com.example.feedarticles.mainRecyclerView.RecyclerFragment
 
-
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_LIST_CATEGORY = "ARG_LIST_CATEGORY"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [CategoryFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
+
 class CategoryFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private lateinit var listCategory: ArrayList<Category>
-    private lateinit var fragment: RecyclerFragment
+    private var recyclerFragment: RecyclerFragment? = null
     private var categoryNum = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
             listCategory = it.getParcelableArrayList(ARG_LIST_CATEGORY)!!
-            //categoryAdapter = it.getParcelable(ARG_ADAPTER_CATEGORY)!!
         }
     }
 
@@ -44,6 +36,7 @@ class CategoryFragment : Fragment() {
         val view =  inflater.inflate(R.layout.fragment_category, container, false)
         val rv = view.findViewById<RecyclerView>(R.id.rv_category_items)
         val categoryAdapter = CategoryAdapter().apply { setCategories(listCategory) }
+
         rv.apply {
             layoutManager = LinearLayoutManager(view.context, LinearLayoutManager.HORIZONTAL, false)
             adapter = categoryAdapter
@@ -57,8 +50,7 @@ class CategoryFragment : Fragment() {
                     "Divers" -> 3
                     else -> 0
                 }
-
-                fragment.refresh(view, categoryNum)
+                recyclerFragment?.refresh(view, categoryNum)
             }
         }
         return view
@@ -66,8 +58,8 @@ class CategoryFragment : Fragment() {
 
     fun getCategoryNum() = categoryNum
 
-    fun setFragment(fragment: RecyclerFragment){
-        this.fragment = fragment
+    fun setFragment(recyclerFragment: RecyclerFragment){
+        this.recyclerFragment = recyclerFragment
     }
 
     companion object {

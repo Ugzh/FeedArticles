@@ -20,6 +20,8 @@
 
     <TextView
         android:id="@+id/tv_itemDetail_secondTitle"
+        android:maxLines="1"
+        android:ellipsize="end"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="@string/product_title"

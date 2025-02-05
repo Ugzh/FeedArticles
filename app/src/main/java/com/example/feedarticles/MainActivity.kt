@@ -24,23 +24,32 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         val userData : UserDto?  = intent.getParcelableExtra(LoginActivity.KEY_USER_DATA)
+        val ft: FragmentTransaction = supportFragmentManager.beginTransaction()
+        val recyclerFragment = RecyclerFragment.newInstance(userData!!)
+        val categoryFragment = CategoryFragment.newInstance(Utils.arrayListOfAllCategories).apply {
+            setFragment(recyclerFragment)
+        }
 
+        val registerCreateItemForResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
+            if (it.resultCode == RESULT_OK){
+                recyclerFragment.refresh(findViewById(android.R.id.content))
+            }
+        }
 
-        findViewById<TextView>(R.id.tv_main_userTitle).text = userData?.login
+        findViewById<TextView>(R.id.tv_main_userTitle).text = userData.login
 
         findViewById<TextView>(R.id.tv_main_logout).setOnClickListener{
             startActivity(Intent(this, LoginActivity::class.java))
             finish()
         }
+
         findViewById<ImageView>(R.id.img_main_logout).setOnClickListener{
             startActivity(Intent(this, LoginActivity::class.java))
             finish()
         }
 
-        val ft: FragmentTransaction = supportFragmentManager.beginTransaction()
-        val recyclerFragment = RecyclerFragment.newInstance(userData ?: UserDto(1,"Ugo","ugo123","4c70ecf0c8bd69311a7634e0d38f4694"))
-        val categoryFragment = CategoryFragment.newInstance(Utils.arrayListOfAllCategories).apply {
-            setFragment(recyclerFragment)
+        findViewById<Button>(R.id.btn_main_addItem).setOnClickListener {
+            registerCreateItemForResult.launch(Intent(this, CreateItemActivity::class.java).apply { putExtra(KEY_USER_DATA_TO_CREATE_ITEM, userData) })
         }
 
         ft.apply {
@@ -51,17 +60,6 @@ class MainActivity : AppCompatActivity() {
             ft.commit()
         } catch (ex : Exception){
             Toast.makeText(this, "Impossible de récupérer les informations de la base de données", Toast.LENGTH_SHORT).show()
-        }
-
-
-        val registerCreateItemForResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
-            if (it.resultCode == RESULT_OK){
-                recyclerFragment.refresh(findViewById(android.R.id.content))
-            }
-        }
-
-        findViewById<Button>(R.id.btn_main_addItem).setOnClickListener {
-            registerCreateItemForResult.launch(Intent(this, CreateItemActivity::class.java).apply { putExtra(KEY_USER_DATA_TO_CREATE_ITEM, userData) })
         }
     }
 

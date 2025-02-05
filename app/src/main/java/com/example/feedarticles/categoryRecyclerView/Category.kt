@@ -6,11 +6,9 @@ import android.os.Parcelable
 data class Category(val name: String) : Parcelable {
     constructor(parcel: Parcel) : this(parcel.readString()!!) {
     }
-
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeString(name)
     }
-
     override fun describeContents(): Int {
         return 0
     }

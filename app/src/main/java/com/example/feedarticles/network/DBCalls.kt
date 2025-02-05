@@ -178,6 +178,5 @@ fun deleteItem(item : ItemDto, user: UserDto, sendResponseCall : (Boolean, Strin
         override fun onFailure(call: Call<DeleteUpdateNewResponseDto>, t: Throwable) {
             sendResponseCall(false, "Un problème est survenue")
         }
-
     } )
 }

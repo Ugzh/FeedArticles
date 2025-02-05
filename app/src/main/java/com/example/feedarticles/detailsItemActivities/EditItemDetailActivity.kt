@@ -77,26 +77,30 @@ class EditItemDetailActivity : AppCompatActivity() {
             val itemTitle = etItemTile.text.toString().trim()
             val itemDescription = etDescription.text.toString().trim()
             val itemUrlImage = etUrlImage.text.toString().trim()
+            val categoryNum = categoryFragment.getCategoryNum()
 
-            updateItem(UpdateItemDto(itemId,
-                itemTitle,
-                itemDescription,
-                itemUrlImage,
-                categoryFragment.getCategoryNum(), user?.token!!)){ isInsert, message ->
+            if(categoryNum != 0){
+                updateItem(UpdateItemDto(itemId,
+                    itemTitle,
+                    itemDescription,
+                    itemUrlImage,
+                    categoryNum, user?.token!!)){ isInsert, message ->
+                        if(isInsert){
+                            setResult(RESULT_OK, Intent().putExtra(KEY_ITEM_UPDATED_FOR_ITEM_DETAIL,ItemDto(itemId,itemTitle,itemDescription, itemUrlImage, categoryFragment.getCategoryNum(), item.createdAt, user.id)))
+                            finish()
+                        } else {
+                            setResult(RESULT_CANCELED)
+                            finish()
+                        }
 
-                if(isInsert){
-                    setResult(RESULT_OK, Intent().putExtra(KEY_ITEM_UPDATED_FOR_ITEM_DETAIL,ItemDto(itemId,itemTitle,itemDescription, itemUrlImage, categoryFragment.getCategoryNum(), item.createdAt, user.id)))
-                    finish()
-                } else {
-                    setResult(RESULT_CANCELED)
-                    finish()
-                }
-
-                Toast.makeText(this@EditItemDetailActivity, message,
+                        Toast.makeText(this@EditItemDetailActivity, message,
+                            Toast.LENGTH_SHORT).show()
+                    }
+            } else
+                Toast.makeText(this@EditItemDetailActivity, "Sélectionner une catégorie",
                     Toast.LENGTH_SHORT).show()
-            }
-
         }
+
         etUrlImage.setOnFocusChangeListener(){ _, hasFocus ->
             if(!hasFocus){
                 val urlText = etUrlImage.text.toString().trim()

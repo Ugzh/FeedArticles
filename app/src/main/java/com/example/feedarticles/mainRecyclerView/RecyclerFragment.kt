@@ -1,5 +1,6 @@
 package com.example.feedarticles.mainRecyclerView
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -36,7 +37,6 @@ class RecyclerFragment : Fragment() {
 
         val registerItemDetailDto = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
             refresh(view)
-
         }
 
         val rv = view.findViewById<RecyclerView>(R.id.rv_items)
@@ -67,10 +67,6 @@ class RecyclerFragment : Fragment() {
             refresh(view)
         }
         return view
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
     }
 
     fun refresh(view: View, categoryToFilter : Int? = 0){

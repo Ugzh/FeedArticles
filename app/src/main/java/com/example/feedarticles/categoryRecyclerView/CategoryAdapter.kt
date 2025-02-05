@@ -12,8 +12,14 @@ import com.example.feedarticles.R
 class CategoryAdapter() : RecyclerView.Adapter<CategoryHolder>() {
     private var categoriesList = mutableListOf<Category>()
     private var sendCategoryCallback: ((String) -> Unit)? = null
-
-
+    private var selectedPos: Int? = null
+    private val drawableList = listOf(
+        R.drawable.category_sport_style,
+        R.drawable.category_manga_style,
+        R.drawable.category_various_style,
+        R.drawable.category_all_style
+    )
+    private val defaultDrawable = R.drawable.edit_text_style
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategoryHolder {
         LayoutInflater.from(parent.context)
             .inflate(R.layout.category_rv_categories, parent, false)
@@ -28,12 +34,24 @@ class CategoryAdapter() : RecyclerView.Adapter<CategoryHolder>() {
 
     override fun onBindViewHolder(holder: CategoryHolder, position: Int) {
        var count = 0
+
         with(holder){
             categoriesList.get(position).let {category ->
                 tvCategory.text = category.name
                 clRv.setOnClickListener{
                     sendCategoryCallback?.invoke(category.name)
+
+                    val prevPos = selectedPos
+                    selectedPos = if (selectedPos == position) null else position
+
+                    prevPos?.let { notifyItemChanged(it) }
+                    notifyItemChanged(position)
                 }
+
+                clRv.setBackgroundResource(
+                    if(selectedPos == position) drawableList.get(position)
+                    else defaultDrawable
+                )
             }
         }
     }

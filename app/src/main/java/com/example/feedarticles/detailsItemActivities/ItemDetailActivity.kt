@@ -28,6 +28,7 @@ class ItemDetailActivity : AppCompatActivity() {
             .getParcelableExtra(RecyclerFragment.KEY_USER_TO_DETAIL_ACTIVITY)
         val itemData : ItemDto?  = intent
             .getParcelableExtra(RecyclerFragment.KEY_ITEM_TO_DETAIL_ACTIVITY)
+
         val tvCategory : TextView = findViewById(R.id.tv_itemDetail_category)
         val tvTitle = findViewById<TextView>(R.id.tv_itemDetail_secondTitle)
         val tvItemTitle : TextView = findViewById(R.id.tv_itemDetail_itemTitle)
@@ -75,8 +76,6 @@ class ItemDetailActivity : AppCompatActivity() {
                                 .error(android.R.drawable.stat_notify_error)
                                 .into(image)
                         }
-
-
                     }
                 }
             }
@@ -123,6 +122,7 @@ class ItemDetailActivity : AppCompatActivity() {
         }
 
         findViewById<Button>(R.id.btn_itemDetail_back).setOnClickListener {
+            setResult(RESULT_CANCELED, Intent().putExtra(KEY_CATEGORY_TO_RECYCLER_FRAGMENT, itemData?.category))
             finish()
         }
     }
@@ -130,5 +130,6 @@ class ItemDetailActivity : AppCompatActivity() {
     companion object{
         const val KEY_ITEM_TO_EDIT_ITEM = "KEY_ITEM_TO_EDIT_ITEM"
         const val KEY_USER_TO_EDIT_ITEM = "KEY_USER_TO_EDIT_ITEM"
+        const val KEY_CATEGORY_TO_RECYCLER_FRAGMENT = "KEY_CATEGORY_TO_RECYCLER_FRAGMENT"
     }
 }
