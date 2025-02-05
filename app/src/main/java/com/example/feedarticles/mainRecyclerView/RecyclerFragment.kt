@@ -17,7 +17,7 @@ import com.example.feedarticles.network.getAllItems
 import com.example.feedarticles.network.getItemById
 
 private const val ARG_USER = "ARG_USER"
-class RecyclerFragment() : Fragment() {
+class RecyclerFragment : Fragment() {
     private var user: UserDto? = null
     private lateinit var itemsAdapter: ItemsAdapter
 

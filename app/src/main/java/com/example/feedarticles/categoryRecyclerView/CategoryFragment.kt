@@ -17,7 +17,6 @@ import com.example.feedarticles.mainRecyclerView.RecyclerFragment
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_LIST_CATEGORY = "ARG_LIST_CATEGORY"
-private const val ARG_FRAGMENT_VIEW = "ARG_FRAGMENT_VIEW"
 
 /**
  * A simple [Fragment] subclass.
@@ -77,7 +76,6 @@ class CategoryFragment : Fragment() {
             CategoryFragment().apply {
                 arguments = Bundle().apply {
                     putParcelableArrayList(ARG_LIST_CATEGORY,categoryList)
-                    //putParcelable(ARG_ADAPTER_CATEGORY,categoryAdapter)
                 }
             }
     }
