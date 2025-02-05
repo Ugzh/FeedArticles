@@ -1,5 +1,6 @@
 package com.example.feedarticles.connexionActivities
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
@@ -7,6 +8,7 @@ import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.feedarticles.Constants
 import com.example.feedarticles.MainActivity
 import com.example.feedarticles.R
 import com.example.feedarticles.dtos.RegisterAndLoginDto
@@ -24,6 +26,7 @@ class LoginActivity : AppCompatActivity() {
         findViewById<Button>(R.id.btn_login_validate).setOnClickListener {
             val username = findViewById<EditText>(R.id.et_login_username).text.toString().trim()
             val password = findViewById<EditText>(R.id.et_login_password).text.toString().trim()
+            val localDB = applicationContext.getSharedPreferences(Constants.KEY_NAME_APP, Context.MODE_PRIVATE)
 
             if(username.isNotEmpty() && password.isNotEmpty()){
                 loginUser(RegisterAndLoginDto(username, password)){user, message ->
@@ -32,6 +35,7 @@ class LoginActivity : AppCompatActivity() {
                     }
 
                     user?.let {
+                        localDB.edit().putLong(Constants.KEY_USER_ID, user.id).putString(Constants.KEY_USER_LOGIN, user.login).putString(Constants.KEY_USER_PASSWORD, user.mdp).putString(Constants.KEY_USER_TOKEN, user.token).apply()
                         startActivity(Intent(this, MainActivity::class.java).putExtra(KEY_USER_DATA, user))
                         finish()
                     }

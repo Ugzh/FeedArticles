@@ -57,7 +57,9 @@ class CreateItemActivity : AppCompatActivity() {
                         }
                     }
                 }
-            }
+            } else
+                Toast.makeText(this,"Veuillez remplir tous les champs, et selectionner une catégorie", Toast.LENGTH_SHORT)
+                    .show()
         }
 
         findViewById<Button>(R.id.btn_createItem_back).setOnClickListener {
