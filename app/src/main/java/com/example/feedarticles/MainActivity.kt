@@ -15,6 +15,8 @@ import com.example.feedarticles.connexionActivities.LoginActivity
 import com.example.feedarticles.detailsItemActivities.CreateItemActivity
 import com.example.feedarticles.dtos.UserDto
 import com.example.feedarticles.mainRecyclerView.RecyclerFragment
+import com.example.feedarticles.utils.Constants
+import com.example.feedarticles.utils.Utils
 import java.lang.Exception
 
 class MainActivity : AppCompatActivity() {
@@ -30,6 +32,7 @@ class MainActivity : AppCompatActivity() {
         val localToken = localBD.getString(Constants.KEY_USER_TOKEN, null) ?: "Unkwown"
 
         val userData : UserDto  = intent.getParcelableExtra(LoginActivity.KEY_USER_DATA) ?: UserDto(localId, localUsername, localPassword, localToken)
+
         val ft: FragmentTransaction = supportFragmentManager.beginTransaction()
         val recyclerFragment = RecyclerFragment.newInstance(userData)
         val categoryFragment = CategoryFragment.newInstance(Utils.arrayListOfAllCategories).apply {

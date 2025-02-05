@@ -107,11 +107,6 @@ fun getItemById(item: ItemDto, user: UserDto, sendItemOrMessageCallback: (ItemDt
     })
 }
 
-
-/*status => 1 : OK
-0 : pas de création
--1: problème de paramètre
--5: création non autorisée*/
 fun createNewItem(newItemDto: NewItemDto, sendResponseCallback : (Boolean, String?) -> Unit){
     val call : Call<DeleteUpdateNewResponseDto>? = ApiService.getApi().createNewItem(newItemDto)
     call?.enqueue(object: Callback<DeleteUpdateNewResponseDto>{

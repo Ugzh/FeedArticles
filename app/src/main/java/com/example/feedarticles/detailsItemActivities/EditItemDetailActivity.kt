@@ -10,8 +10,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentTransaction
 import com.example.feedarticles.R
-import com.example.feedarticles.Utils
-import com.example.feedarticles.categoryRecyclerView.Category
+import com.example.feedarticles.utils.Utils
 import com.example.feedarticles.categoryRecyclerView.CategoryFragment
 import com.example.feedarticles.dtos.ItemDto
 import com.example.feedarticles.dtos.UpdateItemDto
@@ -86,7 +85,14 @@ class EditItemDetailActivity : AppCompatActivity() {
                     itemUrlImage,
                     categoryNum, user?.token!!)){ isInsert, message ->
                         if(isInsert){
-                            setResult(RESULT_OK, Intent().putExtra(KEY_ITEM_UPDATED_FOR_ITEM_DETAIL,ItemDto(itemId,itemTitle,itemDescription, itemUrlImage, categoryFragment.getCategoryNum(), item.createdAt, user.id)))
+                            setResult(RESULT_OK, Intent()
+                                .putExtra(KEY_ITEM_UPDATED_FOR_ITEM_DETAIL,
+                                ItemDto(itemId,
+                                        itemTitle,
+                                        itemDescription,
+                                        itemUrlImage,
+                                        categoryFragment.getCategoryNum(),
+                                        item.createdAt, user.id)))
                             finish()
                         } else {
                             setResult(RESULT_CANCELED)

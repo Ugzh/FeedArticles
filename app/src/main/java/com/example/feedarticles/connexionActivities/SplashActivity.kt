@@ -1,4 +1,4 @@
-package com.example.feedarticles
+package com.example.feedarticles.connexionActivities
 
 import android.content.Context
 import android.content.Intent
@@ -8,8 +8,9 @@ import android.os.Looper
 import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import com.example.feedarticles.connexionActivities.RegisterActivity
-import org.w3c.dom.Text
+import com.example.feedarticles.utils.Constants
+import com.example.feedarticles.MainActivity
+import com.example.feedarticles.R
 
 class SplashActivity : AppCompatActivity() {
     private val handler : Handler = Handler(Looper.getMainLooper())

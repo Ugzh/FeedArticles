@@ -33,13 +33,14 @@ class CategoryAdapter() : RecyclerView.Adapter<CategoryHolder>() {
     }
 
     override fun onBindViewHolder(holder: CategoryHolder, position: Int) {
-       var count = 0
-
         with(holder){
             categoriesList.get(position).let {category ->
                 tvCategory.text = category.name
                 clRv.setOnClickListener{
-                    if (selectedPos == position) sendCategoryCallback?.invoke("") else sendCategoryCallback?.invoke(category.name)
+                    if (selectedPos == position)
+                        sendCategoryCallback?.invoke("")
+                    else
+                        sendCategoryCallback?.invoke(category.name)
 
                     val prevPos = selectedPos
                     selectedPos = if (selectedPos == position) null else position
@@ -49,7 +50,8 @@ class CategoryAdapter() : RecyclerView.Adapter<CategoryHolder>() {
                 }
 
                 clRv.setBackgroundResource(
-                    if(selectedPos == position) drawableList.get(position)
+                    if(selectedPos == position)
+                        drawableList.get(position)
                     else defaultDrawable
                 )
             }

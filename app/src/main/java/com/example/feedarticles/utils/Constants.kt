@@ -1,4 +1,4 @@
-package com.example.feedarticles
+package com.example.feedarticles.utils
 
 object Constants {
     const val KEY_NAME_APP = "KEY_NAME_APP"

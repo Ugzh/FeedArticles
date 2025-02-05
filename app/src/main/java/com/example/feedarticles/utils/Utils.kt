@@ -1,4 +1,4 @@
-package com.example.feedarticles
+package com.example.feedarticles.utils
 
 import com.example.feedarticles.categoryRecyclerView.Category
 

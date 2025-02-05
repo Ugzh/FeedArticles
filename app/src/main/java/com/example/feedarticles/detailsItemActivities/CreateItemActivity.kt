@@ -8,8 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentTransaction
 import com.example.feedarticles.MainActivity
 import com.example.feedarticles.R
-import com.example.feedarticles.Utils
-import com.example.feedarticles.categoryRecyclerView.Category
+import com.example.feedarticles.utils.Utils
 import com.example.feedarticles.categoryRecyclerView.CategoryFragment
 import com.example.feedarticles.dtos.NewItemDto
 import com.example.feedarticles.dtos.UserDto
@@ -37,13 +36,25 @@ class CreateItemActivity : AppCompatActivity() {
         }
 
         findViewById<Button>(R.id.btn_createItem_create).setOnClickListener {
-            val etTitle = findViewById<EditText>(R.id.et_createItem_title).text.toString().trim()
-            val etDescription = findViewById<EditText>(R.id.et_createItem_description).text.toString().trim()
-            val etUrlImg = findViewById<EditText>(R.id.et_createItem_urlImage).text.toString().trim()
+            val etTitle = findViewById<EditText>(R.id.et_createItem_title)
+                         .text
+                         .toString()
+                         .trim()
+            val etDescription = findViewById<EditText>(R.id.et_createItem_description)
+                                .text
+                                .toString()
+                                .trim()
+            val etUrlImg = findViewById<EditText>(R.id.et_createItem_urlImage)
+                            .text
+                            .toString()
+                            .trim()
             val categoryNum = categoryFragment.getCategoryNum()
 
 
-            if(etTitle.isNotEmpty() && etDescription.isNotEmpty() && etUrlImg.isNotEmpty() && categoryNum != 0){
+            if(etTitle.isNotEmpty()
+                && etDescription.isNotEmpty()
+                && etUrlImg.isNotEmpty()
+                && categoryNum != 0){
                 user?.let {
                     createNewItem(
                         NewItemDto(user.id, etTitle, etDescription, etUrlImg, categoryNum, user.token))

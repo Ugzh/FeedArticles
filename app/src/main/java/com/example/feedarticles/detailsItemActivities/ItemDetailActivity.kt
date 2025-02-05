@@ -36,7 +36,7 @@ class ItemDetailActivity : AppCompatActivity() {
         val image = findViewById<ImageView>(R.id.img_itemDetail_picture)
 
         itemData?.let {
-            findViewById<TextView>(R.id.tv_itemDetail_secondTitle).text = it.title
+            tvTitle.text = it.title
             tvCategory.text = when(it.category){
                 1 -> "Sport"
                 2 -> "Manga"
@@ -58,24 +58,25 @@ class ItemDetailActivity : AppCompatActivity() {
             val registerEditItemDetailDto = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){ activity ->
                 if(activity.resultCode == Activity.RESULT_OK){
                     activity.data?.let {intent ->
-                        intent.getParcelableExtra<ItemDto?>(EditItemDetailActivity.KEY_ITEM_UPDATED_FOR_ITEM_DETAIL)?.let { item ->
-                            tvItemTitle.text = item.title
-                            tvDescription.text = item.description
-                            Log.d("test", item.category.toString())
-                            tvCategory.text= when(item.category){
-                                1 -> "Sport"
-                                2 -> "Manga"
-                                3 -> "Divers"
-                                else -> "Inconnu"
+                        intent.getParcelableExtra<ItemDto?>(EditItemDetailActivity.KEY_ITEM_UPDATED_FOR_ITEM_DETAIL)
+                            ?.let { item ->
+                                tvItemTitle.text = item.title
+                                tvDescription.text = item.description
+                                Log.d("test", item.category.toString())
+                                tvCategory.text= when(item.category){
+                                    1 -> "Sport"
+                                    2 -> "Manga"
+                                    3 -> "Divers"
+                                    else -> "Inconnu"
+                                }
+                                tvTitle.text = item.title
+                                Picasso
+                                    .get()
+                                    .load(item.urlImage.ifEmpty { "boo" })
+                                    .placeholder(android.R.drawable.ic_menu_search)
+                                    .error(android.R.drawable.stat_notify_error)
+                                    .into(image)
                             }
-                            tvTitle.text = item.title
-                            Picasso
-                                .get()
-                                .load(item.urlImage.ifEmpty { "boo" })
-                                .placeholder(android.R.drawable.ic_menu_search)
-                                .error(android.R.drawable.stat_notify_error)
-                                .into(image)
-                        }
                     }
                 }
             }
@@ -116,9 +117,7 @@ class ItemDetailActivity : AppCompatActivity() {
                         }
                     }
                 }
-
             }
-
         }
 
         findViewById<Button>(R.id.btn_itemDetail_back).setOnClickListener {
