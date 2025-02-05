@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".detailsItemActivities.CreateItemActivity">
+
+    <TextView
+        android:id="@+id/tv_createItem_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:layout_marginStart="20dp"
+        android:text="@string/create_article_title"
+        android:theme="@style/FirstTitleTheme"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_createItem_titleLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:theme="@style/LabelTheme"
+        android:text="@string/title"
+        app:layout_constraintStart_toStartOf="@+id/tv_createItem_title"
+        app:layout_constraintTop_toBottomOf="@+id/tv_createItem_title" />
+
+    <EditText
+        android:id="@+id/et_createItem_title"
+        android:layout_width="0dp"
+        android:layout_marginEnd="40dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/edit_text_style"
+        android:ems="10"
+        android:inputType="text"
+        android:padding="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/tv_createItem_titleLabel"
+        app:layout_constraintTop_toBottomOf="@+id/tv_createItem_titleLabel" />
+
+    <TextView
+        android:id="@+id/tv_createItem_description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/description_label"
+        android:theme="@style/LabelTheme"
+        android:layout_marginTop="20dp"
+        app:layout_constraintStart_toStartOf="@+id/et_createItem_title"
+        app:layout_constraintTop_toBottomOf="@+id/et_createItem_title" />
+
+    <EditText
+        android:id="@+id/et_createItem_description"
+        android:layout_width="0dp"
+        android:layout_height="150dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/edit_text_style"
+        android:ems="10"
+        android:inputType="text"
+        android:padding="10dp"
+        app:layout_constraintEnd_toEndOf="@+id/et_createItem_title"
+        app:layout_constraintHorizontal_bias="0.4"
+        app:layout_constraintStart_toStartOf="@+id/tv_createItem_description"
+        app:layout_constraintTop_toBottomOf="@+id/tv_createItem_description" />
+
+    <TextView
+        android:id="@+id/tv_createItem_urlImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="@string/image_label"
+        android:theme="@style/LabelTheme"
+        app:layout_constraintStart_toStartOf="@+id/et_createItem_description"
+        app:layout_constraintTop_toBottomOf="@+id/et_createItem_description" />
+
+    <EditText
+        android:id="@+id/et_createItem_urlImage"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/edit_text_style"
+        android:ems="10"
+        android:inputType="text"
+        android:layout_marginTop="20dp"
+        android:padding="10dp"
+        app:layout_constraintEnd_toEndOf="@+id/et_createItem_description"
+        app:layout_constraintStart_toStartOf="@+id/tv_createItem_urlImage"
+        app:layout_constraintTop_toBottomOf="@+id/tv_createItem_urlImage" />
+
+    <TextView
+        android:id="@+id/tv_createItem_category"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/product_category"
+        android:layout_marginTop="20dp"
+        android:theme="@style/LabelTheme"
+        app:layout_constraintStart_toStartOf="@+id/et_createItem_urlImage"
+        app:layout_constraintTop_toBottomOf="@+id/et_createItem_urlImage" />
+
+    <FrameLayout
+        android:id="@+id/fl_createItem"
+        android:layout_width="0dp"
+        android:layout_height="70dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintEnd_toEndOf="@+id/et_createItem_urlImage"
+        app:layout_constraintStart_toStartOf="@+id/tv_createItem_category"
+        app:layout_constraintTop_toBottomOf="@+id/tv_createItem_category">
+
+    </FrameLayout>
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/black"
+        android:text="@string/create"
+        android:theme="@style/ButtonActionTheme"
+        app:cornerRadius="10dp"
+        android:paddingHorizontal="42dp"
+        android:paddingVertical="8dp"
+        android:layout_marginTop="40dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fl_createItem" />
+</androidx.constraintlayout.widget.ConstraintLayout>

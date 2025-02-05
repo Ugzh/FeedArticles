@@ -29,4 +29,5 @@
     <string name="manga">Manga</string>
     <string name="various">Divers</string>
     <string name="unknown">Inconnu</string>
+    <string name="title">Titre</string>
 </resources>

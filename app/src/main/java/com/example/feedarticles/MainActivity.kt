@@ -2,7 +2,6 @@ package com.example.feedarticles
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
@@ -13,7 +12,7 @@ import androidx.fragment.app.FragmentTransaction
 import com.example.feedarticles.categoryRecyclerView.Category
 import com.example.feedarticles.categoryRecyclerView.CategoryFragment
 import com.example.feedarticles.connexionActivities.LoginActivity
-import com.example.feedarticles.dtos.NewItemDto
+import com.example.feedarticles.detailsItemActivities.CreateItemActivity
 import com.example.feedarticles.dtos.UserDto
 import com.example.feedarticles.mainRecyclerView.RecyclerFragment
 import java.lang.Exception
@@ -53,7 +52,11 @@ class MainActivity : AppCompatActivity() {
         val registerCreateItemForResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){}
 
         findViewById<Button>(R.id.btn_main_addItem).setOnClickListener {
-            //registerCreateItemForResult.launch()
+            registerCreateItemForResult.launch(Intent(this, CreateItemActivity::class.java).apply { putExtra(KEY_USER_DATA_TO_CREATE_ITEM, userData) })
         }
+    }
+
+    companion object{
+        const val KEY_USER_DATA_TO_CREATE_ITEM = "KEY_USER_DATA_TO_CREATE_ITEM"
     }
 }

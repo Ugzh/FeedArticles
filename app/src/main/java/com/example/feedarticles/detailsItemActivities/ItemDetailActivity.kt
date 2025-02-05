@@ -1,4 +1,4 @@
-package com.example.feedarticles
+package com.example.feedarticles.detailsItemActivities
 
 import android.app.Activity
 import android.content.Intent
@@ -8,12 +8,9 @@ import android.view.View
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
-import com.example.feedarticles.connexionActivities.LoginActivity
+import com.example.feedarticles.R
 import com.example.feedarticles.dtos.ItemDto
 import com.example.feedarticles.dtos.UserDto
 import com.example.feedarticles.mainRecyclerView.RecyclerFragment

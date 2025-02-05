@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ItemDetailActivity">
+    tools:context=".detailsItemActivities.ItemDetailActivity">
 
     <TextView
         android:id="@+id/tv_itemDetail_firstTitle"
@@ -52,11 +52,12 @@
 
     <TextView
         android:id="@+id/tv_itemDetail_itemTitle"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:fontFamily="@font/nunito_medium"
         android:text="@string/product_title"
         android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/img_itemDetail_picture"
         app:layout_constraintStart_toStartOf="@+id/img_itemDetail_picture"
         app:layout_constraintTop_toBottomOf="@+id/tv_itemDetail_category" />
 
