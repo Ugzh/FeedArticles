@@ -48,6 +48,7 @@ class LoginActivity : AppCompatActivity() {
                         startActivity(Intent(this, MainActivity::class.java)
                             .putExtra(KEY_USER_DATA, user))
                         finish()
+
                     }
                 }
             } else

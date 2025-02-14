@@ -36,18 +36,22 @@ class CreateItemActivity : AppCompatActivity() {
         }
 
         findViewById<Button>(R.id.btn_createItem_create).setOnClickListener {
+
             val etTitle = findViewById<EditText>(R.id.et_createItem_title)
                          .text
                          .toString()
                          .trim()
+
             val etDescription = findViewById<EditText>(R.id.et_createItem_description)
                                 .text
                                 .toString()
                                 .trim()
+
             val etUrlImg = findViewById<EditText>(R.id.et_createItem_urlImage)
                             .text
                             .toString()
                             .trim()
+
             val categoryNum = categoryFragment.getCategoryNum()
 
 

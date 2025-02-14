@@ -41,6 +41,10 @@ fun registerUser(user : RegisterAndLoginDto, sendStatusMessageCallback : (String
     })
 }
 
+
+
+
+
 fun loginUser(user : RegisterAndLoginDto, sendUserOrMessageCallback : (UserDto?, String?) -> Unit){
     val call : Call<RegisterAndLoginResponseDto>? = ApiService.getApi().loginUser(user.login, user.password)
     call?.enqueue(object : Callback<RegisterAndLoginResponseDto>{

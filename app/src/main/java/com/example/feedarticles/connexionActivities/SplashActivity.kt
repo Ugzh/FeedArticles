@@ -34,9 +34,13 @@ class SplashActivity : AppCompatActivity() {
 
         applicationContext.getSharedPreferences(Constants.KEY_NAME_APP, Context.MODE_PRIVATE).let {
             it.getString(Constants.KEY_USER_TOKEN, null)?.let {
-                //startActivity(Intent(this, RegisterActivity::class.java))
                 startActivity(Intent(this, MainActivity::class.java))
-            } ?: startActivity(Intent(this, RegisterActivity::class.java))
+                finish()
+
+            } ?: {
+                startActivity(Intent(this, RegisterActivity::class.java))
+                finish()
+            }
         }
     }
 

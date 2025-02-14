@@ -66,6 +66,7 @@
         android:fontFamily="@font/nunito_medium"
         android:text="@string/product_title"
         android:textSize="20sp"
+        android:layout_marginTop="5dp"
         app:layout_constraintEnd_toEndOf="@+id/img_itemDetail_picture"
         app:layout_constraintStart_toStartOf="@+id/img_itemDetail_picture"
         app:layout_constraintTop_toBottomOf="@+id/tv_itemDetail_category" />

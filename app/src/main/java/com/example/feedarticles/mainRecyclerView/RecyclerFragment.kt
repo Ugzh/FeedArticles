@@ -86,7 +86,6 @@ class RecyclerFragment : Fragment() {
         }
     }
 
-
     companion object {
         const val KEY_USER_TO_DETAIL_ACTIVITY = "KEY_USER_TO_DETAIL_ACTIVITY"
         const val KEY_ITEM_TO_DETAIL_ACTIVITY = "KEY_ITEM_TO_DETAIL_ACTIVITY"
